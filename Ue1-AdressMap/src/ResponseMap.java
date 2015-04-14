@@ -16,7 +16,13 @@ public class ResponseMap implements ResponseMapInterface {
 
 	@Override
 	public void put(String key, String msg) {
-		// TODO Auto-generated method stub
+		// if key in use
+		
+		MapElement newMapelement = new MapElement(); // neues Objekt vom Typ MapElement erzeugen
+		newMapelement.key = key;					// Hinzufügen der Strings
+		newMapelement.value = msg;
+		responseList.add(newMapelement);			//neues MapElement in die ArrayListe packen
+
 		
 	}
 
