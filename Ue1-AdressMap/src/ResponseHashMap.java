@@ -13,8 +13,8 @@ public class ResponseHashMap implements ResponseMapInterface {
 	}
 
 	@Override
-	public void put(String key, String msg) {
-		if(meinehashmap.containsKey(key)) {throw new RuntimeException();}
+	public void put(String key, String msg) throws KeinKontaktException{ 
+		if(meinehashmap.containsKey(key)) throw new KeinKontaktException();
 		meinehashmap.put(key, msg);
 		
 //	if (allKeys().contains(key)){throw new RuntimeException();}

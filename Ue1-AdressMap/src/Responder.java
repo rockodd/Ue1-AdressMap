@@ -21,7 +21,7 @@ public class Responder {
 	private void fillResponseMap() {
 		responseMap.put("slow", "Hierbei handelt es sich wahrscheinlich um ein Hardware Problem." + "Ein Hardware Upgrade sollte das Problem beheben");
 		responseMap.put("bug", "Danke für die Meldung dieses Fehlers" + "Unser Entwicklungsteam arbeitet bereits an einer Lösung!");
-		
+		responseMap.put("slow", "Hierbei handelt es sich wahrscheinlich um ein Hardware Problem." + "Ein Hardware Upgrade sollte das Problem beheben");
 	}
 	public String generateResponse(String keyword) {
 		String response = responseMap.get(keyword);
