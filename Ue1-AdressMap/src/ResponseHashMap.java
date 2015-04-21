@@ -1,22 +1,21 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.TreeMap;
 
 
-public class ResponseMap implements ResponseMapInterface {
-	private TreeMap<String, String> meinetreemap = new TreeMap<String, String>();
+public class ResponseHashMap implements ResponseMapInterface {
+	private HashMap<String, String> meinehashmap = new HashMap<String, String>();
 	//private ArrayList<MapElement> responseList = new ArrayList<>();// responselist ist die liste, die die ganzen Mapelemente enthält 
 	@Override
 	public String get(String key) {
 
-		return meinetreemap.get(key);
+		return meinehashmap.get(key);
 	}
 
 	@Override
 	public void put(String key, String msg) {
-		if(meinetreemap.containsKey(key)) {throw new RuntimeException();}
-		meinetreemap.put(key, msg);
+		if(meinehashmap.containsKey(key)) {throw new RuntimeException();}
+		meinehashmap.put(key, msg);
 		
 //	if (allKeys().contains(key)){throw new RuntimeException();}
 //		MapElement newMap = new MapElement();
@@ -30,7 +29,7 @@ public class ResponseMap implements ResponseMapInterface {
 
 	@Override
 	public boolean contains(String key) {
-			return meinetreemap.containsKey(key);
+			return meinehashmap.containsKey(key);
 		
 		
 		
@@ -46,9 +45,9 @@ public class ResponseMap implements ResponseMapInterface {
 	@Override
 	public List<String> allKeys() {
 		 List<String> keyliste = new ArrayList<String>();
-		 keyliste.addAll(meinetreemap.keySet());
+		 keyliste.addAll(meinehashmap.keySet());
 		 //return keyliste;
-		 return new ArrayList<String>(meinetreemap.keySet());
+		 return new ArrayList<String>(meinehashmap.keySet());
 		
 		  //meinehashmap.keySet();
 //		// Typ = Liste in Form eines Strings mit der variablen allkeys
@@ -61,7 +60,7 @@ public class ResponseMap implements ResponseMapInterface {
 	@Override
 	public int size() {
 		
-		return meinetreemap.size();
+		return meinehashmap.size();
 	}
 
 }
