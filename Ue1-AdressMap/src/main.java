@@ -40,7 +40,7 @@ public class main {
 		
 		System.out.println(meinAdressbuch.getDetails("Montana").getAdresse());
 		//System.out.println(meinAdressbuch.getDetails("PeterFox").getAdresse());
-		meinAdressbuch.removeDetails("Peter");
+		meinAdressbuch.removeDetails("Frank");
 		
 	}
 	

@@ -41,7 +41,7 @@ public class AddressBook implements AddressBookInterface {
 
 	@Override
 	public int getNumberOfEntries() {
-		return meinetreemap.size() ;
+		return meinetreemap.size()/2 ;
 	}
 
 	@Override
