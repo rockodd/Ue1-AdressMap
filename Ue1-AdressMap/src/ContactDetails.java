@@ -7,9 +7,6 @@ private String adresse = null;
 
 //Konstruktor
 	public ContactDetails(String name,String vorname,String adresse) {
-		//this.vorname = vorname;
-		//this.name = name;
-		//this.adresse = adresse;
 		this.name = name;
 		this.vorname = vorname;
 		this.adresse = adresse;

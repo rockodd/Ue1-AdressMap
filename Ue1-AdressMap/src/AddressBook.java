@@ -1,7 +1,7 @@
 import java.util.TreeMap;
 
 
-public class AdressBook implements AddressBookInterface {
+public class AddressBook implements AddressBookInterface {
 	private TreeMap<String, ContactDetails> meinetreemap = new TreeMap<>();
 	
 	
@@ -10,47 +10,48 @@ public class AdressBook implements AddressBookInterface {
 	public ContactDetails getDetails(String key) throws KeinKontaktException {
 		
 		if (!this.keyInUse(key)) throw new KeinKontaktException();
-		
 		return meinetreemap.get(key);
 	}
 
 	@Override
 	public boolean keyInUse(String key) {
-		return meinetreemap.containsKey(key);
+		return meinetreemap.equals(key);
 	}
 
 	@Override
 	public void addDetails(ContactDetails details) {
-		if (this.keyInUse(details.getVorname()+details.getName())) throw new DoppelException();
-		meinetreemap.put(details.getVorname()+details.getName(), details);
+		//Schlüssel ist Vorname und Nachname
+		if (this.keyInUse(details.getVorname())||this.keyInUse(details.getName())) throw new DoppelException();
+		meinetreemap.put(details.getName(), details);
+		meinetreemap.put(details.getVorname(), details);
 
 	}
 
 	@Override
 	public void changeDetails(String oldKey, ContactDetails details) {
-		// TODO Auto-generated method stub
-		if (this.keyInUse(oldKey) && details!= null) {
+		if (this.keyInUse(oldKey) && details!= null) {			
 			
 			// alten EIntrag entfernen
 			this.removeDetails(oldKey);
-
+			
 			// neuer Eintrag
 			this.addDetails(details);
 		}
-
 	}
 
 	@Override
 	public int getNumberOfEntries() {
-		// TODO Auto-generated method stub
 		return meinetreemap.size() ;
 	}
 
 	@Override
 	public void removeDetails(String key) {
-		
+		// prüfen ob Key überhaupt vorhanden
 		if (this.keyInUse(key)) {
-			meinetreemap.remove(key);
+			String name= meinetreemap.get(key).getName();
+			String vorname= meinetreemap.get(key).getVorname();
+			meinetreemap.remove(name);
+			meinetreemap.remove(vorname);
 		}
 
 	}
