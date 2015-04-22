@@ -15,7 +15,7 @@ public class AddressBook implements AddressBookInterface {
 
 	@Override
 	public boolean keyInUse(String key) {
-		return meinetreemap.equals(key);
+		return meinetreemap.containsKey(key);
 	}
 
 	@Override

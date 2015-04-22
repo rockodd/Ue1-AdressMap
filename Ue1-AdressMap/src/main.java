@@ -31,13 +31,14 @@ public class main {
 		
 		meinAdressbuch.addDetails(a);
 		meinAdressbuch.addDetails(b);
-		System.out.println(meinAdressbuch.getDetails("Fox").getAdresse());
+		System.out.println(meinAdressbuch.getDetails("Peter").getAdresse());
 		System.out.println(meinAdressbuch.getDetails("Paul").getAdresse());
 		
 		meinAdressbuch.changeDetails("Fox",new ContactDetails("Montana", "Frank", "Gangway 6"));
 		//System.out.println(meinAdressbuch.getDetails("PeterFox").getAdresse());
 		//meinAdressbuch.removeDetails("PeterFox");
-		System.out.println(meinAdressbuch.getDetails("Peter").getAdresse());
+		
+		System.out.println(meinAdressbuch.getDetails("Montana").getAdresse());
 		//System.out.println(meinAdressbuch.getDetails("PeterFox").getAdresse());
 		meinAdressbuch.removeDetails("Peter");
 		
