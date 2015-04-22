@@ -5,25 +5,16 @@ public class main {
 	
 	
 	public static void main(String[] args) {
-	System.out.println("Anzahl der Kontakte:" + meinAdressbuch.getNumberOfEntries());
-	testdata();
-	
-	
-	System.out.println("Anzahl der Kontakte:" + meinAdressbuch.getNumberOfEntries());
-	
-
-		
-
+		// Anzahl der gespeicherten Adressen
+		System.out.println("Anzahl der Kontakte:" + meinAdressbuch.getNumberOfEntries());
+		testdata();
+		System.out.println("Anzahl der Kontakte:" + meinAdressbuch.getNumberOfEntries());
 	}
-	
-	
 	
 	private static void testdata(){
 		
 		ContactDetails a = new ContactDetails("Fox", "Peter","Fuchsbau 1");		
 		ContactDetails b = new ContactDetails("Walker", "Paul","Catwalk 1");
-		
-		
 
 		a.setAdresse("Fuchsbau 4");
 		a.setAdresse("Fuchsbau 5");
@@ -31,6 +22,7 @@ public class main {
 		
 		meinAdressbuch.addDetails(a);
 		meinAdressbuch.addDetails(b);
+		
 		System.out.println(meinAdressbuch.getDetails("Peter").getAdresse());
 		System.out.println(meinAdressbuch.getDetails("Paul").getAdresse());
 		

@@ -8,7 +8,7 @@ public class AddressBook implements AddressBookInterface {
 	
 	@Override
 	public ContactDetails getDetails(String key) throws KeinKontaktException {
-		
+		// Prüfen ob Key schon in TreeMap
 		if (!this.keyInUse(key)) throw new KeinKontaktException();
 		return meinetreemap.get(key);
 	}
@@ -20,8 +20,9 @@ public class AddressBook implements AddressBookInterface {
 
 	@Override
 	public void addDetails(ContactDetails details) {
-		//Schlüssel ist Vorname und Nachname
+		//Prüfen auf vorhandensein beider Schlüssel
 		if (this.keyInUse(details.getVorname())||this.keyInUse(details.getName())) throw new DoppelException();
+		//zwei Einträge mit verschiedenen Schlüsseln
 		meinetreemap.put(details.getName(), details);
 		meinetreemap.put(details.getVorname(), details);
 
@@ -41,6 +42,8 @@ public class AddressBook implements AddressBookInterface {
 
 	@Override
 	public int getNumberOfEntries() {
+		//Rückgabe der Größe geteilt durch zwei, 
+		//da alle Details doppelt eingetragen sind
 		return meinetreemap.size()/2 ;
 	}
 
@@ -48,6 +51,7 @@ public class AddressBook implements AddressBookInterface {
 	public void removeDetails(String key) {
 		// prüfen ob Key überhaupt vorhanden
 		if (this.keyInUse(key)) {
+			// Vorname und Name aus den Details lesen um beide EInträge entfernen zu können
 			String name= meinetreemap.get(key).getName();
 			String vorname= meinetreemap.get(key).getVorname();
 			meinetreemap.remove(name);
