@@ -5,7 +5,7 @@ import java.util.TreeMap;
 
 import javax.print.attribute.standard.PrinterMakeAndModel;
 
-public class AddressBook implements AdressBookInterfaceException {
+public class AddressBook implements AdressBookExceptionsInterface {
 	private TreeMap<String, ContactDetails> meinetreemap = new TreeMap<>();
 
 	/* (non-Javadoc)

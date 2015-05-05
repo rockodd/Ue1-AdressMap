@@ -1,3 +1,4 @@
+package SupportLine;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,7 +19,7 @@ public static void main(String[] args){
 	
 }
 
-private static String InputReader(){
+public static String InputReader(){
 	InputStreamReader isr = new InputStreamReader(System.in);
 	BufferedReader br = new BufferedReader(isr);
 	

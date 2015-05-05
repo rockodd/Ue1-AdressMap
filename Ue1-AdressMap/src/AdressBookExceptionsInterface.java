@@ -1,4 +1,4 @@
-public interface AdressBookInterfaceException {
+public interface AdressBookExceptionsInterface {
 
 	public abstract ContactDetails getDetails(String key)
 			throws KeinKontaktException, ParamKeyIsNullException,
