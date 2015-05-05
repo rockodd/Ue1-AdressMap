@@ -13,4 +13,5 @@ public interface AddressBookInterface {
 	
 	public void removeDetails(String key);
 
+	public ContactDetails[] search(String keyPrefix);
 }

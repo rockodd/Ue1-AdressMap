@@ -17,7 +17,7 @@ public class ResponseMapArrayList implements ResponseMapInterface {
 	@Override
 	public void put(String key, String msg) {
 		if (allKeys().contains(key)){throw new RuntimeException();}
-		MapElement newMap = new MapElement();
+		MapElement newMap = new MapElement(msg, msg);
 			newMap.key=(key);
 			newMap.value=(msg);
 			responseList.add(newMap);
