@@ -1,7 +1,7 @@
 
 public class main {
 
-	private static AddressBook meinAdressbuch = new AddressBook();
+	private static AdressBookInterfaceException meinAdressbuch = new AddressBook();
 	
 	
 	public static void main(String[] args) {

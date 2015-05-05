@@ -1,4 +1,4 @@
 
-public class DoppelException extends RuntimeException {
+public class DoppelException extends Exception {
 
 }
