@@ -1,14 +1,14 @@
 
 
 public class ContactDetails {
-private String name = null;
 private String vorname = null;
+private String name = null;
 private String adresse = null;
 
 //Konstruktor
-	public ContactDetails(String name,String vorname,String adresse) {
-		this.name = name;
+	public ContactDetails(String vorname,String name,String adresse) {
 		this.vorname = vorname;
+		this.name = name;
 		this.adresse = adresse;
 	}
 	

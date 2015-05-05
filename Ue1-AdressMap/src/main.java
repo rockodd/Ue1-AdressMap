@@ -7,7 +7,8 @@ public class main {
 	
 	
 	public static void main(String[] args) {
-		// Anzahl der gespeicherten Adressen
+		// main Methodentest
+		testdata();
 		boolean cancel = false;
 		String input = null, vorname = null, nachname = null, adresse = null;
 		while (!cancel){
@@ -49,7 +50,7 @@ public class main {
 					
 				}
 				catch (DoppelException e){ 
-					System.out.println("Kontakt schon vorhanden.");
+					System.out.println("Kontakt schon vorhanden mit dem Fehler: " +e);
 				}
 				break;
 			case "suche"	:
@@ -103,8 +104,70 @@ public class main {
 		}
 	}
 	
-//	private static void testdata(){
-//		
+	private static void testdata(){
+		System.out.println(meinAdressbuch.getNumberOfEntries());
+		System.out.println("1 | ERFOLGREICH");
+		try {
+			meinAdressbuch.addDetails(new ContactDetails("Fox", "Peter", "Fuchsbau"));
+			System.out.println("2 | ERFOLGREICH");
+		} catch (DoppelException | ParamKeyIsNullException
+				| ParamKeyIsEmptyException e1) {
+			System.out.println(e1);
+			System.out.println("TEST FEHLERHAFT");
+		}
+		try {
+			meinAdressbuch.addDetails(new ContactDetails("", "Ralf", "Hauptstrasse 1"));
+			System.out.println("TEST FEHLERHAFT");
+		} catch (DoppelException | ParamKeyIsNullException
+				| ParamKeyIsEmptyException e1) {
+			System.out.println(e1);
+			System.out.println("3 | ERFOLGREICH");
+		}
+		try {
+			meinAdressbuch.addDetails(new ContactDetails("Hans", "Peter", "Fuchsbau 1"));
+			System.out.println("TEST FEHLERHAFT");
+		} catch (DoppelException | ParamKeyIsNullException
+				| ParamKeyIsEmptyException e1) {
+			System.out.println(e1);
+			System.out.println("4 | ERFOLGREICH");
+		}
+		try {
+			meinAdressbuch.changeDetails("Fox", new ContactDetails("Frank", "Montana", "Gangway 1"));
+			System.out.println("5 | ERFOLGREICH");
+		} catch (ParamKeyIsNullException | ParamKeyIsEmptyException
+				| DoppelException e1) {
+			System.out.println(e1);
+			System.out.println("TEST FEHLERHAFT");
+		}
+		try {
+			meinAdressbuch.changeDetails("Fox", new ContactDetails("Frank", "Montana", "Gangway 1"));
+			System.out.println("TEST FEHLERHAFT");
+		} catch (ParamKeyIsNullException | ParamKeyIsEmptyException
+				| DoppelException e1) {
+			System.out.println(e1);
+			System.out.println("6 | ERFOLGREICH");
+		}
+		try {
+			for(ContactDetails result : meinAdressbuch.search("Mon")){
+			System.out.println(result.getVorname());}
+			System.out.println("7 | ERFOLGREICH");
+		} catch (ParamKeyIsNullException | ParamKeyIsEmptyException e) {
+			System.out.println(e);
+			System.out.println("TEST FEHLERHAFT");
+		}
+		try {
+			for(ContactDetails result : meinAdressbuch.search(null)){
+			System.out.println(result.getVorname());}
+			System.out.println("TEST FEHLERHAFT");
+		} catch (ParamKeyIsNullException | ParamKeyIsEmptyException e) {
+			System.out.println(e);
+			System.out.println("8 | ERFOLGREICH");
+		}
+		System.out.println(meinAdressbuch.getNumberOfEntries());
+		System.out.println("9 | ERFOLGREICH");
+		
+		
+		
 //		ContactDetails a = new ContactDetails("Fox", "Peter","Fuchsbau 1");		
 //		ContactDetails b = new ContactDetails("Walker", "Paul","Catwalk 1");
 //		ContactDetails c = new ContactDetails("Walfred", "PJ","Hood 1");
@@ -112,29 +175,74 @@ public class main {
 //		a.setAdresse("Fuchsbau 5");
 //		b.setAdresse("Catwalk 99");
 //		
-//		meinAdressbuch.addDetails(a);
-//		meinAdressbuch.addDetails(b);
-//		meinAdressbuch.addDetails(c);
+//		try {
+//			meinAdressbuch.addDetails(a);
+//		} catch (DoppelException | ParamKeyIsNullException
+//				| ParamKeyIsEmptyException e) {
+//			System.out.println(e);
+//		}
+//		try {
+//			meinAdressbuch.addDetails(b);
+//		} catch (DoppelException | ParamKeyIsNullException
+//				| ParamKeyIsEmptyException e) {
+//			System.out.println(e);
+//		}
+//		try {
+//			meinAdressbuch.addDetails(c);
+//		} catch (DoppelException | ParamKeyIsNullException
+//				| ParamKeyIsEmptyException e) {
+//			System.out.println(e);
+//		}
 //		
-//		System.out.println(meinAdressbuch.getDetails("Peter").getAdresse());
-//		System.out.println(meinAdressbuch.getDetails("Paul").getAdresse());
+//		try {
+//			System.out.println(meinAdressbuch.getDetails("Peter").getAdresse());
+//		} catch (KeinKontaktException | ParamKeyIsNullException
+//				| ParamKeyIsEmptyException e) {
+//			System.out.println(e);
+//		}
+//		try {
+//			System.out.println(meinAdressbuch.getDetails("Paul").getAdresse());
+//		} catch (KeinKontaktException | ParamKeyIsNullException
+//				| ParamKeyIsEmptyException e) {
+//			System.out.println(e);
+//		}
 //		
-//		meinAdressbuch.changeDetails("Fox",new ContactDetails("Montana", "Frank", "Gangway 6"));
+//		try {
+//			meinAdressbuch.changeDetails("Fox",new ContactDetails("Montana", "Frank", "Gangway 6"));
+//		} catch (ParamKeyIsNullException | ParamKeyIsEmptyException
+//				| DoppelException e) {
+//			System.out.println(e);
+//		}
 //		//System.out.println(meinAdressbuch.getDetails("PeterFox").getAdresse());
 //		//meinAdressbuch.removeDetails("PeterFox");
 //		
-//		System.out.println(meinAdressbuch.getDetails("Montana").getAdresse());
+//		try {
+//			System.out.println(meinAdressbuch.getDetails("Montana").getAdresse());
+//		} catch (KeinKontaktException | ParamKeyIsNullException
+//				| ParamKeyIsEmptyException e) {
+//			System.out.println(e);
+//		}
 //		//System.out.println(meinAdressbuch.getDetails("PeterFox").getAdresse());
-//		meinAdressbuch.removeDetails("Frank");
-//		
-//		meinAdressbuch.search("Walker");
-//		for(ContactDetails result : meinAdressbuch.search("Wa")){
-//			System.out.println(result.getVorname());
-//			System.out.println(result.getName());
+//		try {
+//			meinAdressbuch.removeDetails("Frank");
+//		} catch (ParamKeyIsNullException | ParamKeyIsEmptyException e) {
+//			System.out.println(e);
 //		}
 //		
-//	}
+//		try {
+//			meinAdressbuch.search("Walker");
+//		} catch (ParamKeyIsNullException | ParamKeyIsEmptyException e) {
+//			System.out.println(e);
+//		}
+//		try {
+//			for(ContactDetails result : meinAdressbuch.search("Wa")){
+//				System.out.println(result.getVorname());
+//				System.out.println(result.getName());
+//			}
+//		} catch (ParamKeyIsNullException | ParamKeyIsEmptyException e) {
+//			System.out.println(e);
+//		}
+//		
+	}
 	
-	
-
 }

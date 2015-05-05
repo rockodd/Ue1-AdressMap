@@ -37,14 +37,12 @@ public class AddressBook implements AdressBookExceptionsInterface {
 	@Override
 	public void addDetails(ContactDetails details) throws DoppelException, ParamKeyIsNullException, ParamKeyIsEmptyException {
 		// Prüfen auf vorhandensein beider Schlüssel
-		if (this.keyInUse(details.getVorname())
-				|| this.keyInUse(details.getName()))
-			throw new DoppelException();
+		if (this.keyInUse(details.getVorname())) throw new DoppelException("Der Vorname ist schon vorhanden");
+		else if (this.keyInUse(details.getName())) throw new DoppelException("Der Nachname ist schon vorhanden");
 		else
 		// zwei Einträge mit verschiedenen Schlüsseln
 		meinetreemap.put(details.getName(), details);
 		meinetreemap.put(details.getVorname(), details);
-
 	}
 
 	
