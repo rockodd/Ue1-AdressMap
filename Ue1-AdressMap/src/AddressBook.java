@@ -15,7 +15,7 @@ public class AddressBook implements AdressBookExceptionsInterface {
 	public ContactDetails getDetails(String key) throws KeinKontaktException, ParamKeyIsNullException, ParamKeyIsEmptyException {
 		// Prüfen ob Key schon in TreeMap
 		if (!this.keyInUse(key))
-			throw new KeinKontaktException();
+			throw new KeinKontaktException("Kontakt nicht vorhanden");
 		return meinetreemap.get(key);
 	}
 
@@ -35,8 +35,10 @@ public class AddressBook implements AdressBookExceptionsInterface {
 	 * @see AdressBookInterfaceException#addDetails(ContactDetails)
 	 */
 	@Override
-	public void addDetails(ContactDetails details) throws DoppelException, ParamKeyIsNullException, ParamKeyIsEmptyException {
+	public void addDetails(ContactDetails details) throws DoppelException, ParamKeyIsNullException, ParamKeyIsEmptyException, ParamContactIsNullException, ParamContactIsEmptyException {
 		// Prüfen auf vorhandensein beider Schlüssel
+		if (details == null) throw new ParamContactIsNullException("ContactDetails ist null");
+		if (details.equals("")) throw new ParamContactIsEmptyException("ContactDetails ist Empty");
 		if (this.keyInUse(details.getVorname())) throw new DoppelException("Der Vorname ist schon vorhanden");
 		else if (this.keyInUse(details.getName())) throw new DoppelException("Der Nachname ist schon vorhanden");
 		else
@@ -50,7 +52,7 @@ public class AddressBook implements AdressBookExceptionsInterface {
 	 * @see AdressBookInterfaceException#changeDetails(java.lang.String, ContactDetails)
 	 */
 	@Override
-	public void changeDetails(String oldKey, ContactDetails details) throws ParamKeyIsNullException, ParamKeyIsEmptyException, DoppelException {
+	public void changeDetails(String oldKey, ContactDetails details) throws ParamKeyIsNullException, ParamKeyIsEmptyException, DoppelException, ParamContactIsNullException, ParamContactIsEmptyException {
 		if (oldKey == null) throw new ParamKeyIsNullException ("Der alte Key ist null"); 
 		else if (oldKey.isEmpty()) throw new ParamKeyIsEmptyException("Der alte Key ist leer"); 
 		else 
@@ -89,8 +91,6 @@ public class AddressBook implements AdressBookExceptionsInterface {
 		}
 
 	}
-
-	
 	/* (non-Javadoc)
 	 * @see AdressBookInterfaceException#search(java.lang.String)
 	 */
@@ -105,7 +105,5 @@ public class AddressBook implements AdressBookExceptionsInterface {
 			}
 		}
 		return (found.toArray(new ContactDetails[found.size()]));
-
 	}
-
 }

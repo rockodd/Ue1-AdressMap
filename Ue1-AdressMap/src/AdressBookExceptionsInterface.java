@@ -9,11 +9,11 @@ public interface AdressBookExceptionsInterface {
 
 	public abstract void addDetails(ContactDetails details)
 			throws DoppelException, ParamKeyIsNullException,
-			ParamKeyIsEmptyException;
+			ParamKeyIsEmptyException, ParamContactIsNullException, ParamContactIsEmptyException;
 
 	public abstract void changeDetails(String oldKey, ContactDetails details)
 			throws ParamKeyIsNullException, ParamKeyIsEmptyException,
-			DoppelException;
+			DoppelException, ParamContactIsNullException, ParamContactIsEmptyException;
 
 	public abstract int getNumberOfEntries();
 

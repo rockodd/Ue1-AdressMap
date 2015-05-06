@@ -39,41 +39,29 @@ public class main {
 				System.out.println("Bitte Adresse eingeben:");
 				adresse = SupportLine.InputReader();
 				try {
-					try {
-						meinAdressbuch.addDetails(new ContactDetails(nachname,vorname,adresse));
-						System.out.println("Neuer Kontakt wurde angelegt.");
-					} catch (ParamKeyIsNullException e) {
-						System.out.println("Kontakt wurde nicht geändert aufgrund des Fehlers: " + e);
-					} catch (ParamKeyIsEmptyException e) {
-						System.out.println("Kontakt wurde nicht geändert aufgrund des Fehlers: " + e);
-					}
-					
+					meinAdressbuch.addDetails(new ContactDetails(nachname,vorname,adresse));
+					System.out.println("Neuer Kontakt wurde angelegt.");
+				} catch (DoppelException | ParamKeyIsNullException
+						| ParamKeyIsEmptyException
+						| ParamContactIsNullException | ParamContactIsEmptyException e2) {
+					e2.getMessage();
 				}
-				catch (DoppelException e){ 
-					System.out.println("Kontakt schon vorhanden mit dem Fehler: " +e);
-				}
+
 				break;
 			case "suche"	:
 				System.out.println("Bitte Vornamen oder Nachnamen für die Suche iengeben:");
 				input = SupportLine.InputReader();
 				try {
-					try {
-						System.out.println(meinAdressbuch.getDetails(input).getVorname()+","+meinAdressbuch.getDetails(input).getName());
-					} catch (ParamKeyIsNullException e) {
-						System.out.println("Suche konnte nicht ausgeführt werden aufgrund des Fehlers: " + e);
-					} catch (ParamKeyIsEmptyException e) {
-						System.out.println("Suche konnte nicht ausgeführt werden aufgrund des Fehlers: " + e);
-					}
-					try {
-						System.out.println(meinAdressbuch.getDetails(input).getAdresse());
-					} catch (ParamKeyIsNullException e) {
-						System.out.println("Adresse konnte nicht gefunden werden aufgrund des Fehlers: " + e);
-					} catch (ParamKeyIsEmptyException e) {
-						System.out.println("Adresse konnte nicht gefunden werden aufgrund des Fehlers: " + e);
-					}
+					System.out.println(meinAdressbuch.getDetails(input).getVorname()+","+meinAdressbuch.getDetails(input).getName());
+				} catch (KeinKontaktException | ParamKeyIsNullException
+						| ParamKeyIsEmptyException e1) {
+					e1.getMessage();
 				}
-				catch (KeinKontaktException e){ 
-					System.out.println("Kein Kontakt vorhanden.");
+				try {
+					System.out.println(meinAdressbuch.getDetails(input).getAdresse());
+				} catch (KeinKontaktException | ParamKeyIsNullException
+						| ParamKeyIsEmptyException e1) {
+					e1.getMessage();
 				}
 				break;
 				
@@ -88,16 +76,11 @@ public class main {
 				adresse = SupportLine.InputReader();
 				try {
 					meinAdressbuch.changeDetails("input",new ContactDetails(nachname,vorname, adresse));
-				} catch (ParamKeyIsNullException e) {
-					System.out.println(e);
-					e.printStackTrace();
-				} catch (ParamKeyIsEmptyException e) {
-					System.out.println(e);
-					e.printStackTrace();
-				} catch (DoppelException e) {
-					System.out.println(e);
-					e.printStackTrace();
+				} catch (ParamKeyIsNullException | ParamKeyIsEmptyException
+						| DoppelException | ParamContactIsNullException | ParamContactIsEmptyException e) {
+					e.getMessage();
 				}
+
 				break;
 			}
 			
@@ -111,40 +94,40 @@ public class main {
 			meinAdressbuch.addDetails(new ContactDetails("Fox", "Peter", "Fuchsbau"));
 			System.out.println("2 | ERFOLGREICH");
 		} catch (DoppelException | ParamKeyIsNullException
-				| ParamKeyIsEmptyException e1) {
-			System.out.println(e1);
+				| ParamKeyIsEmptyException | ParamContactIsNullException | ParamContactIsEmptyException e1) {
+			e1.getMessage();
 			System.out.println("TEST FEHLERHAFT");
 		}
 		try {
 			meinAdressbuch.addDetails(new ContactDetails("", "Ralf", "Hauptstrasse 1"));
 			System.out.println("TEST FEHLERHAFT");
 		} catch (DoppelException | ParamKeyIsNullException
-				| ParamKeyIsEmptyException e1) {
-			System.out.println(e1);
+				| ParamKeyIsEmptyException | ParamContactIsNullException | ParamContactIsEmptyException e1) {
+			e1.getMessage();
 			System.out.println("3 | ERFOLGREICH");
 		}
 		try {
 			meinAdressbuch.addDetails(new ContactDetails("Hans", "Peter", "Fuchsbau 1"));
 			System.out.println("TEST FEHLERHAFT");
 		} catch (DoppelException | ParamKeyIsNullException
-				| ParamKeyIsEmptyException e1) {
-			System.out.println(e1);
+				| ParamKeyIsEmptyException | ParamContactIsNullException | ParamContactIsEmptyException e1) {
+			e1.getMessage();
 			System.out.println("4 | ERFOLGREICH");
 		}
 		try {
 			meinAdressbuch.changeDetails("Fox", new ContactDetails("Frank", "Montana", "Gangway 1"));
 			System.out.println("5 | ERFOLGREICH");
 		} catch (ParamKeyIsNullException | ParamKeyIsEmptyException
-				| DoppelException e1) {
-			System.out.println(e1);
+				| DoppelException | ParamContactIsNullException | ParamContactIsEmptyException e1) {
+			e1.getMessage();
 			System.out.println("TEST FEHLERHAFT");
 		}
 		try {
 			meinAdressbuch.changeDetails("Fox", new ContactDetails("Frank", "Montana", "Gangway 1"));
 			System.out.println("TEST FEHLERHAFT");
 		} catch (ParamKeyIsNullException | ParamKeyIsEmptyException
-				| DoppelException e1) {
-			System.out.println(e1);
+				| DoppelException | ParamContactIsNullException | ParamContactIsEmptyException e1) {
+			e1.getMessage();
 			System.out.println("6 | ERFOLGREICH");
 		}
 		try {
@@ -152,7 +135,7 @@ public class main {
 			System.out.println(result.getVorname());}
 			System.out.println("7 | ERFOLGREICH");
 		} catch (ParamKeyIsNullException | ParamKeyIsEmptyException e) {
-			System.out.println(e);
+			e.getMessage();
 			System.out.println("TEST FEHLERHAFT");
 		}
 		try {
@@ -160,11 +143,19 @@ public class main {
 			System.out.println(result.getVorname());}
 			System.out.println("TEST FEHLERHAFT");
 		} catch (ParamKeyIsNullException | ParamKeyIsEmptyException e) {
-			System.out.println(e);
+			e.getMessage();
 			System.out.println("8 | ERFOLGREICH");
 		}
 		System.out.println(meinAdressbuch.getNumberOfEntries());
 		System.out.println("9 | ERFOLGREICH");
+		try {
+			meinAdressbuch.addDetails(null);
+		} catch (DoppelException | ParamKeyIsNullException
+				| ParamKeyIsEmptyException | ParamContactIsNullException | ParamContactIsEmptyException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		}
+
 		
 		
 		

@@ -18,5 +18,10 @@ public class AdressBookTest {
 		assertTrue(meinAdressbuch.getNumberOfEntries()==0);
 		
 	}
+	@Test
+	public void Test2() {
+		assertTrue(meinAdressbuch.getNumberOfEntries()==0);
+		
+	}
 
 }
