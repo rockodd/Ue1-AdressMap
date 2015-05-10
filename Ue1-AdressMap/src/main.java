@@ -7,8 +7,10 @@ public class main {
 	
 	
 	public static void main(String[] args) {
-		// main Methodentest
+		// **************** Testdaten bearbeiten *************
 		testdata();
+		
+		// ************* ab hier Benutzerschnittstelle ********
 		boolean cancel = false;
 		String input = null, vorname = null, nachname = null, adresse = null;
 		while (!cancel){
@@ -86,6 +88,7 @@ public class main {
 			
 		}
 	}
+	
 	
 	private static void testdata(){
 		System.out.println(meinAdressbuch.getNumberOfEntries());

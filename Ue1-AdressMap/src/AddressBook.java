@@ -69,6 +69,7 @@ public class AddressBook implements AdressBookExceptionsInterface {
 	 */
 	@Override
 	public int getNumberOfEntries() {
+		if ((meinetreemap.size() % 2) > 0) throw new InkonsistentException("Adressbuch ist fehlerhaft, ungerade Anzahl von Einträgen");
 		// Rückgabe der Größe geteilt durch zwei,
 		// da alle Details doppelt eingetragen sind
 		return meinetreemap.size() / 2;
@@ -81,16 +82,16 @@ public class AddressBook implements AdressBookExceptionsInterface {
 	@Override
 	public void removeDetails(String key) throws ParamKeyIsNullException, ParamKeyIsEmptyException {
 		// prüfen ob Key überhaupt vorhanden
-		if (this.keyInUse(key)) {
-			// Vorname und Name aus den Details lesen um beide EInträge
-			// entfernen zu können
-			String name = meinetreemap.get(key).getName();
-			String vorname = meinetreemap.get(key).getVorname();
-			meinetreemap.remove(name);
-			meinetreemap.remove(vorname);
+		if (this.keyInUse(key)) { 
+				// Vorname und Name aus den Details lesen um beide EInträge
+				// entfernen zu können
+				String name = meinetreemap.get(key).getName();
+				String vorname = meinetreemap.get(key).getVorname();
+				meinetreemap.remove(name);
+				meinetreemap.remove(vorname);
+			}
+			
 		}
-
-	}
 	/* (non-Javadoc)
 	 * @see AdressBookInterfaceException#search(java.lang.String)
 	 */

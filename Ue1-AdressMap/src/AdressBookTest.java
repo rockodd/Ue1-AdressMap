@@ -12,12 +12,19 @@ public class AdressBookTest {
 	public static void setUpBeforeClass() throws Exception {
 
 	}
+	
+	@Test (expected = DetailsNotFoundException.class)
+	public void testGetDetailsDetailsNotFound () throws DetailsNotFoundException, ParameterStringIsEmptyException {
+		book.getDetails("keinKey");
+	}
 
 	@Test
 	public void Test1() {
 		assertTrue(meinAdressbuch.getNumberOfEntries()==0);
 		
 	}
+	
+	
 	@Test
 	public void Test2() {
 		assertTrue(meinAdressbuch.getNumberOfEntries()==0);
