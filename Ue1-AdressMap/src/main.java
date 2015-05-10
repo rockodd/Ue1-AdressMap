@@ -46,7 +46,7 @@ public class main {
 				} catch (DoppelException | ParamKeyIsNullException
 						| ParamKeyIsEmptyException
 						| ParamContactIsNullException | ParamContactIsEmptyException e2) {
-					e2.getMessage();
+					System.out.println(e2.getMessage());
 				}
 
 				break;
@@ -57,13 +57,13 @@ public class main {
 					System.out.println(meinAdressbuch.getDetails(input).getVorname()+","+meinAdressbuch.getDetails(input).getName());
 				} catch (KeinKontaktException | ParamKeyIsNullException
 						| ParamKeyIsEmptyException e1) {
-					e1.getMessage();
+					System.out.println(e1.getMessage());
 				}
 				try {
 					System.out.println(meinAdressbuch.getDetails(input).getAdresse());
 				} catch (KeinKontaktException | ParamKeyIsNullException
 						| ParamKeyIsEmptyException e1) {
-					e1.getMessage();
+					System.out.println(e1.getMessage());
 				}
 				break;
 				
@@ -79,8 +79,8 @@ public class main {
 				try {
 					meinAdressbuch.changeDetails("input",new ContactDetails(nachname,vorname, adresse));
 				} catch (ParamKeyIsNullException | ParamKeyIsEmptyException
-						| DoppelException | ParamContactIsNullException | ParamContactIsEmptyException e) {
-					e.getMessage();
+						| DoppelException | ParamContactIsNullException | ParamContactIsEmptyException | KeinKontaktException e) {
+					System.out.println(e.getMessage());
 				}
 
 				break;
@@ -121,7 +121,7 @@ public class main {
 			meinAdressbuch.changeDetails("Fox", new ContactDetails("Frank", "Montana", "Gangway 1"));
 			System.out.println("5 | ERFOLGREICH");
 		} catch (ParamKeyIsNullException | ParamKeyIsEmptyException
-				| DoppelException | ParamContactIsNullException | ParamContactIsEmptyException e1) {
+				| DoppelException | ParamContactIsNullException | ParamContactIsEmptyException | KeinKontaktException e1) {
 			e1.getMessage();
 			System.out.println("TEST FEHLERHAFT");
 		}
@@ -129,7 +129,7 @@ public class main {
 			meinAdressbuch.changeDetails("Fox", new ContactDetails("Frank", "Montana", "Gangway 1"));
 			System.out.println("TEST FEHLERHAFT");
 		} catch (ParamKeyIsNullException | ParamKeyIsEmptyException
-				| DoppelException | ParamContactIsNullException | ParamContactIsEmptyException e1) {
+				| DoppelException | ParamContactIsNullException | ParamContactIsEmptyException | KeinKontaktException e1) {
 			e1.getMessage();
 			System.out.println("6 | ERFOLGREICH");
 		}

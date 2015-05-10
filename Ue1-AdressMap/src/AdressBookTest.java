@@ -52,13 +52,13 @@ public class AdressBookTest {
 	
 	//Test7 addDetails muss ParamKeyIsNullException liefern 
 	@Test (expected = ParamKeyIsNullException.class)
-	public void testchangeNull () throws ParamKeyIsNullException, ParamKeyIsEmptyException, DoppelException, ParamContactIsNullException, ParamContactIsEmptyException{	
+	public void testchangeNull () throws ParamKeyIsNullException, ParamKeyIsEmptyException, DoppelException, ParamContactIsNullException, ParamContactIsEmptyException, KeinKontaktException{	
 		meinAdressbuch.changeDetails(null, new ContactDetails("fail", "wrong", "street"));
 	}
 	
 	//Test8 changeDetails muss ParamKeyIsEmptyException liefern 
 	@Test (expected = ParamKeyIsEmptyException.class)
-	public void testchangeEmpty () throws ParamKeyIsNullException, ParamKeyIsEmptyException, DoppelException, ParamContactIsNullException, ParamContactIsEmptyException{
+	public void testchangeEmpty () throws ParamKeyIsNullException, ParamKeyIsEmptyException, DoppelException, ParamContactIsNullException, ParamContactIsEmptyException, KeinKontaktException{
 		meinAdressbuch.changeDetails("", new ContactDetails("fail", "wrong", "street"));
 	}
 
@@ -68,14 +68,26 @@ public class AdressBookTest {
 		assertTrue(meinAdressbuch.getNumberOfEntries()==1);
 		
 	}
+		
+	//Test10 remove muss  ParamKeyIsNullException bei null liefern
+	@Test (expected = ParamKeyIsNullException.class)
+	public void testremoveNull() throws ParamKeyIsNullException, ParamKeyIsEmptyException, KeinKontaktException {		
+		meinAdressbuch.removeDetails(null);
+	}
 	
-	//Test10 search muss  ParamKeyIsNullException bei null liefern
+	//Test11 remove muss  ParamKeyIsEmptyException bei null liefern
+	@Test (expected = ParamKeyIsEmptyException.class)
+	public void testremoveEmpty() throws ParamKeyIsNullException, ParamKeyIsEmptyException, KeinKontaktException {		
+		meinAdressbuch.removeDetails("");
+	}
+	
+	//Test12 search muss  ParamKeyIsNullException bei null liefern
 	@Test (expected = ParamKeyIsNullException.class)
 	public void testsearchNull() throws ParamKeyIsNullException, ParamKeyIsEmptyException {		
 		meinAdressbuch.search(null);
 	}
 	
-	//Test11 search muss  ParamKeyIsEmptyException bei "" liefern
+	//Test13 search muss  ParamKeyIsEmptyException bei "" liefern
 	@Test (expected = ParamKeyIsEmptyException.class)
 	public void testsearchEmpty() throws ParamKeyIsNullException, ParamKeyIsEmptyException {		
 		meinAdressbuch.search("");

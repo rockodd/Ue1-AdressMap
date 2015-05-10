@@ -51,7 +51,7 @@ public class AddressBook implements AdressBookExceptionsInterface {
 	 * @see AdressBookInterfaceException#changeDetails(java.lang.String, ContactDetails)
 	 */
 	@Override
-	public void changeDetails(String oldKey, ContactDetails details) throws ParamKeyIsNullException, ParamKeyIsEmptyException, DoppelException, ParamContactIsNullException, ParamContactIsEmptyException {
+	public void changeDetails(String oldKey, ContactDetails details) throws ParamKeyIsNullException, ParamKeyIsEmptyException, DoppelException, ParamContactIsNullException, ParamContactIsEmptyException, KeinKontaktException {
 		if (oldKey == null) throw new ParamKeyIsNullException ("Der alte Key ist null"); 
 		else if (oldKey.isEmpty()) throw new ParamKeyIsEmptyException("Der alte Key ist leer"); 
 		else 
@@ -79,16 +79,21 @@ public class AddressBook implements AdressBookExceptionsInterface {
 	 * @see AdressBookInterfaceException#removeDetails(java.lang.String)
 	 */
 	@Override
-	public void removeDetails(String key) throws ParamKeyIsNullException, ParamKeyIsEmptyException {
+	public void removeDetails(String key) throws ParamKeyIsNullException, ParamKeyIsEmptyException, KeinKontaktException {
 		// prüfen ob Key überhaupt vorhanden
-		if (this.keyInUse(key)) { 
-				// Vorname und Name aus den Details lesen um beide EInträge
-				// entfernen zu können
-				String name = meinetreemap.get(key).getName();
-				String vorname = meinetreemap.get(key).getVorname();
-				meinetreemap.remove(name);
-				meinetreemap.remove(vorname);
-			}
+		if(key == null)	throw new ParamKeyIsNullException("SuchKey war null");
+		if(key.isEmpty())	throw new ParamKeyIsEmptyException("SuchKey war leer");
+		if (!this.keyInUse(key)) throw new KeinKontaktException("SuchKey nicht vorhanden");
+
+			
+		// Vorname und Name aus den Details lesen um beide EInträge
+		// entfernen zu können
+		String name = meinetreemap.get(key).getName();
+		String vorname = meinetreemap.get(key).getVorname();
+		meinetreemap.remove(name);
+		meinetreemap.remove(vorname);
+			
+		assert ((meinetreemap.size() % 2) == 0);
 			
 		}
 	/* (non-Javadoc)

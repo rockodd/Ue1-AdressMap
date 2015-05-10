@@ -13,12 +13,12 @@ public interface AdressBookExceptionsInterface {
 
 	public abstract void changeDetails(String oldKey, ContactDetails details)
 			throws ParamKeyIsNullException, ParamKeyIsEmptyException,
-			DoppelException, ParamContactIsNullException, ParamContactIsEmptyException;
+			DoppelException, ParamContactIsNullException, ParamContactIsEmptyException, KeinKontaktException;
 
 	public abstract int getNumberOfEntries();
 
 	public abstract void removeDetails(String key)
-			throws ParamKeyIsNullException, ParamKeyIsEmptyException;
+			throws ParamKeyIsNullException, ParamKeyIsEmptyException, KeinKontaktException;
 
 	public abstract ContactDetails[] search(String keyPrefix)
 			throws ParamKeyIsNullException, ParamKeyIsEmptyException;
