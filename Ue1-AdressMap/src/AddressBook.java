@@ -93,7 +93,6 @@ public class AddressBook implements AdressBookExceptionsInterface {
 		meinetreemap.remove(name);
 		meinetreemap.remove(vorname);
 			
-		assert ((meinetreemap.size() % 2) == 0);
 			
 		}
 	/* (non-Javadoc)

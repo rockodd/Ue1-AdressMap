@@ -1,17 +1,19 @@
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 
 public class AdressBookTest {
 	// Adressbuch anlegen,
-	private static AdressBookExceptionsInterface meinAdressbuch = new AddressBook();
-
+	static AddressBook meinAdressbuch;	
+	static ContactDetails neuerKontakt = new ContactDetails("Sam", "Som", "Adresse1");
 	//einen Kontakt für tests anlegen,
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		meinAdressbuch.addDetails(new ContactDetails("Sam", "Som", "Adresse1"));
+	@Before
+	public void setupBefore() throws Exception {
+		meinAdressbuch = new AddressBook();
+		meinAdressbuch.addDetails(neuerKontakt);
 	}
 
 	//Test1 getDetails muss KeinKontaktException liefern
@@ -46,8 +48,8 @@ public class AdressBookTest {
 	
 	//Test6 addDetails muss DoppelException liefern bei doppelt eingegebenen Nachnamen
 	@Test (expected = DoppelException.class)
-	public void testchangedetailNull () throws DoppelException, ParamKeyIsNullException, ParamKeyIsEmptyException, ParamContactIsNullException, ParamContactIsEmptyException  {
-		meinAdressbuch.addDetails(new ContactDetails("Som", "Pan", "adr2"));
+	public void testadddetailsNachnameDoppel () throws DoppelException, ParamKeyIsNullException, ParamKeyIsEmptyException, ParamContactIsNullException, ParamContactIsEmptyException  {
+		meinAdressbuch.addDetails(new ContactDetails("Pan", "Som", "adr2"));
 	}
 	
 	//Test7 addDetails muss ParamKeyIsNullException liefern 
@@ -92,5 +94,13 @@ public class AdressBookTest {
 	public void testsearchEmpty() throws ParamKeyIsNullException, ParamKeyIsEmptyException {		
 		meinAdressbuch.search("");
 	}
+	
+	//Test14 prüfen auf Inkosistenz
+	@Test (expected = KeinKontaktException.class)
+	public void testremove() throws ParamKeyIsNullException, ParamKeyIsEmptyException, KeinKontaktException {		
+		meinAdressbuch.removeDetails("Sam");
+		assertNotEquals(neuerKontakt, meinAdressbuch.getDetails("Sam"));
+	}
+	
 	
 }
