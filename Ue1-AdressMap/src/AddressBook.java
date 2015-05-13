@@ -54,7 +54,6 @@ public class AddressBook implements AdressBookExceptionsInterface {
 	public void changeDetails(String oldKey, ContactDetails details) throws ParamKeyIsNullException, ParamKeyIsEmptyException, DoppelException, ParamContactIsNullException, ParamContactIsEmptyException, KeinKontaktException {
 		if (oldKey == null) throw new ParamKeyIsNullException ("Der alte Key ist null"); 
 		else if (oldKey.isEmpty()) throw new ParamKeyIsEmptyException("Der alte Key ist leer"); 
-		else 
 			// alten EIntrag entfernen
 			this.removeDetails(oldKey);
 			// neuer Eintrag
@@ -81,17 +80,19 @@ public class AddressBook implements AdressBookExceptionsInterface {
 	@Override
 	public void removeDetails(String key) throws ParamKeyIsNullException, ParamKeyIsEmptyException, KeinKontaktException {
 		// prüfen ob Key überhaupt vorhanden
-		if(key == null)	throw new ParamKeyIsNullException("SuchKey war null");
-		if(key.isEmpty())	throw new ParamKeyIsEmptyException("SuchKey war leer");
-		if (!this.keyInUse(key)) throw new KeinKontaktException("SuchKey nicht vorhanden");
-
+		if(key == null)	throw new ParamKeyIsNullException("Lösch-Key war null");
+		if(key.isEmpty())	throw new ParamKeyIsEmptyException("Lösch-Key war leer");
+		if (this.keyInUse(key)){
+			// Vorname und Name aus den Details lesen um beide EInträge
+			// entfernen zu können
+			String name = meinetreemap.get(key).getName();
+			String vorname = meinetreemap.get(key).getVorname();
+			meinetreemap.remove(name);
+			meinetreemap.remove(vorname);			
+		}
+		else throw new KeinKontaktException("Kein Kontakt zum löschen vorhanden");
 			
-		// Vorname und Name aus den Details lesen um beide EInträge
-		// entfernen zu können
-		String name = meinetreemap.get(key).getName();
-		String vorname = meinetreemap.get(key).getVorname();
-		meinetreemap.remove(name);
-		meinetreemap.remove(vorname);
+
 			
 			
 		}

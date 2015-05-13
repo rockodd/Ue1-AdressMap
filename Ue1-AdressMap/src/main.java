@@ -17,23 +17,24 @@ public class main {
 			System.out.println();
 			System.out.println("--------------------------------------------------");
 			System.out.println("Was möchten Sie tun? Bitte eins der folgenden Kommandos eingeben.");
-			System.out.println("bye 	-> 	Beendet das Adressbuch");
-			System.out.println("anzahl 	-> 	Gibt die Anzahl der Einträge aus");
-			System.out.println("neu 	-> 	Legt einen neuen Kontakt an");
-			System.out.println("suche 	-> 	Sucht nach eingegebenen Kontakt");
-			System.out.println("refresh -> 	Ändert die Details zu einem Kontakt");
+			System.out.println("(b)ye 		-> 	Beendet das Adressbuch");
+			System.out.println("(a)nzahl 	-> 	Gibt die Anzahl der Einträge aus");
+			System.out.println("(n)eu 		-> 	Legt einen neuen Kontakt an");
+			System.out.println("(s)uche 	-> 	Sucht nach eingegebenen Kontakt");
+			System.out.println("(e)rneuern 	-> 	Ändert die Details zu einem Kontakt");
+			System.out.println("(r)emove 	-> 	Löscht eingegebenen Kontakt");
+			System.out.println("(l)iste 	-> 	Gibt alle Kontakte mit eingegebenen String zurück");
 			System.out.println("--------------------------------------------------");
 			
 			input = SupportLine.InputReader();
-			System.out.println();
 			switch (input.toLowerCase()){
-			case "bye" :	
+			case "b" :	
 				cancel = true;
 				break;
-			case "anzahl"	: 
+			case "a"	: 
 				System.out.println("Anzahl der Kontakte: " + meinAdressbuch.getNumberOfEntries());
 				break;
-			case "neu"	:
+			case "n"	:
 				System.out.println("Bitte Vornamen eingeben:");
 				vorname = SupportLine.InputReader();
 				System.out.println("Bitte Nachnamen eingeben:");
@@ -50,7 +51,7 @@ public class main {
 				}
 
 				break;
-			case "suche"	:
+			case "s"	:
 				System.out.println("Bitte Vornamen oder Nachnamen für die Suche iengeben:");
 				input = SupportLine.InputReader();
 				try {
@@ -67,7 +68,7 @@ public class main {
 				}
 				break;
 				
-			case "refresh"	:
+			case "e"	:
 				System.out.println("Bitte Vornamen oder Nachnamen des Kontaktes, der geändert werden soll eingeben:");
 				input = SupportLine.InputReader();
 				System.out.println("Bitte neuen Vornamen eingeben:");
@@ -77,13 +78,44 @@ public class main {
 				System.out.println("Bitte neue Adresse eingeben:");
 				adresse = SupportLine.InputReader();
 				try {
-					meinAdressbuch.changeDetails("input",new ContactDetails(nachname,vorname, adresse));
+					meinAdressbuch.changeDetails(input,new ContactDetails(nachname,vorname, adresse));
 				} catch (ParamKeyIsNullException | ParamKeyIsEmptyException
 						| DoppelException | ParamContactIsNullException | ParamContactIsEmptyException | KeinKontaktException e) {
 					System.out.println(e.getMessage());
 				}
-
 				break;
+				
+			case "l"	:
+				System.out.println("Bitte Such-String eingeben (Case-Sensitive):");
+				input = SupportLine.InputReader();
+				try {
+					//details = new ContactDetails(meinAdressbuch.search(input));
+					for(ContactDetails detail : meinAdressbuch.search(input)){
+							
+						System.out.println(detail.getVorname() + ",\t" + detail.getName() + ",\t" + detail.getAdresse()); 
+							//System.out.println(detail.getVorname());
+					}
+
+					
+					
+				} catch (ParamKeyIsNullException | ParamKeyIsEmptyException e) {
+					System.out.println(e.getMessage());
+				}
+				break;
+				
+			case "r"	:
+				System.out.println("Bitte Vornamen oder Nachnamen des Kontaktes eingeben, der entfernt werden soll:");
+				input = SupportLine.InputReader();
+				try {
+					meinAdressbuch.removeDetails(input);
+				} catch (ParamKeyIsNullException | ParamKeyIsEmptyException
+						| KeinKontaktException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
+				}
+				break;
+
+				
 			}
 			
 		}
