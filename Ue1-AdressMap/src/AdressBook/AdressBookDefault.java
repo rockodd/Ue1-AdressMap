@@ -1,13 +1,15 @@
 package AdressBook;
 
+// erzeugt ein Adressbuch mit Beispieldaten
 public class AdressBookDefault extends AddressBook {
-	// Konstruktor
+	// Konstruktor führt Methoden aus Elternklasse aus
 	public AdressBookDefault() {
 		
 		super();
 		fillDefaultData();
 	}
-
+	
+	// Methode um Beispieldaten einzufügen
 	private void fillDefaultData() {
 		try {
 			addDetails(new ContactDetails("Peter", "Pan", "Nimmerland 3"));

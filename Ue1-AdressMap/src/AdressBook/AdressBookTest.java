@@ -1,17 +1,11 @@
+package AdressBook;
+
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import AdressBook.AddressBook;
-import AdressBook.ContactDetails;
-import AdressBook.DoppelException;
-import AdressBook.KeinKontaktException;
-import AdressBook.ParamContactIsEmptyException;
-import AdressBook.ParamContactIsNullException;
-import AdressBook.ParamKeyIsEmptyException;
-import AdressBook.ParamKeyIsNullException;
 
 
 public class AdressBookTest {

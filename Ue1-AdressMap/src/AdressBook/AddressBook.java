@@ -78,10 +78,11 @@ public class AddressBook implements AdressBookExceptionsInterface {
 	/* (non-Javadoc)
 	 * @see 
 	 */
+	// gibt alle Keys aus dem Adressbuch zurück
 	public Set<String> allKeys() {
 		return meinetreemap.keySet();
 	}
-	
+	//gibt alle ContactDetails Objekte aus dem Adressbuch zurück
 	public Collection<ContactDetails> allDetails() {
 		return meinetreemap.values();
 	}

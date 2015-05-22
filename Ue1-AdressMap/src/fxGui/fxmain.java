@@ -1,8 +1,4 @@
-
 package fxGui;
-
-
-import java.awt.event.KeyListener;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -24,13 +20,14 @@ public class fxmain extends Application {
 		primaryStage.setTitle("Adressbuch GUI");
 		BorderPane root = new BorderPane();
 		
+		// ListView und TableView erzeugen
 		final ListView listView = new ListView();
 		final TableView tableView = new TableView();
 		
-		// observableArrayList erstellen, werden für TableView
+		// observableArrayList für TableView (Werden für FX Views benötigt um Listen zu übergeben)
 	    ObservableList <ContactDetails> ContactDetailsList = FXCollections.observableArrayList(meinAdressbuch.allDetails());
 		
-		// observableArrayList erstellen, werden für ListView benötigt und werden mit Daten gefüllt
+		// observableArrayList für die ListView mit allen Keys
 	    ObservableList keyList = FXCollections.observableArrayList(meinAdressbuch.allKeys());
 	    
 	    // Spalten für die TableView anlegen
@@ -40,30 +37,25 @@ public class fxmain extends Application {
         firstNameCol.setCellValueFactory( new PropertyValueFactory<ContactDetails, String>("vorname"));
         lastNameCol.setCellValueFactory( new PropertyValueFactory<ContactDetails, String>("name"));
         adressCol.setCellValueFactory( new PropertyValueFactory<ContactDetails, String>("adresse"));
-        
+        // Spalten der Tableview übergeben
         tableView.getColumns().addAll(firstNameCol,lastNameCol,adressCol);
-        // Verhindert bei Übergröße das anzeigen einer zusätzlichen Spalte, nur letzte Spalte wird vergrößert
-        tableView.setColumnResizePolicy(tableView.CONSTRAINED_RESIZE_POLICY);
-        
 
+        // Verhindert bei Übergröße das Anzeigen einer zusätzlichen Spalte, nur letzte Spalte wird vergrößert
+        tableView.setColumnResizePolicy(tableView.CONSTRAINED_RESIZE_POLICY);
 		
-		
-		
+        // Zellwerte der ListView und der TableView mit unseren Daten füllen 
 		listView.setItems(keyList);
-		tableView.setItems(ContactDetailsList);
+		tableView.setItems(ContactDetailsList);		
 		
-		
-		
-		
+		// ListView und TableView auf der BorderPane platzieren
 		root.setLeft(listView);
 		root.setCenter(tableView);
-		
+		// Scene erstellen und auf PrimaryStage anzeigen
 		Scene scene = new Scene (root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
-	}
-
+		}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
