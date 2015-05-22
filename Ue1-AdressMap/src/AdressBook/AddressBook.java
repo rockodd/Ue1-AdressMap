@@ -1,5 +1,6 @@
 package AdressBook;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
@@ -78,10 +79,13 @@ public class AddressBook implements AdressBookExceptionsInterface {
 	 * @see 
 	 */
 	public Set<String> allKeys() {
-		
 		return meinetreemap.keySet();
 	}
-
+	
+	public Collection<ContactDetails> allDetails() {
+		return meinetreemap.values();
+	}
+	
 	
 	/* (non-Javadoc)
 	 * @see AdressBookInterfaceException#removeDetails(java.lang.String)
