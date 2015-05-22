@@ -1,6 +1,7 @@
+package AdressBook;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Set;
 import java.util.TreeMap;
 
 
@@ -71,6 +72,14 @@ public class AddressBook implements AdressBookExceptionsInterface {
 		// Rückgabe der Größe geteilt durch zwei,
 		// da alle Details doppelt eingetragen sind
 		return meinetreemap.size() / 2;
+	}
+	
+	/* (non-Javadoc)
+	 * @see 
+	 */
+	public Set<String> allKeys() {
+		
+		return meinetreemap.keySet();
 	}
 
 	
