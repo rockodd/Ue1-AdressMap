@@ -1,5 +1,6 @@
-package AdressBook;
+package calendar;
 
+import static org.junit.Assert.assertTrue;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -52,7 +53,7 @@ public class Appointment {
 		
 	}
 	public void setTerminBezeichnung(String terminBezeichnung){
-		this.setTerminBezeichnung(terminBezeichnung);
+		this.terminBezeichnung.set(terminBezeichnung);
 	}
 	private StringProperty terminBeschreibung = new SimpleStringProperty();
 	public String getTerminBeschreibung(){
@@ -62,4 +63,15 @@ public class Appointment {
 		this.terminBeschreibung.set(terminBeschreibung);
 	}
 
+	
+	public static void main(String[] args) {
+		Appointment termin = new Appointment();
+		termin.setTerminBezeichnung("Bez-ONE");
+		termin.setStartUhrzeit("19:30");
+		termin.setEndUhrzeit("18:00");
+		System.out.println(termin.getStartUhrzeit());
+		System.out.println(termin.getEndUhrzeit());
+		System.out.println(termin.getTerminBezeichnung());
+	}
+	
 }
