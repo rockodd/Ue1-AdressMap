@@ -1,6 +1,12 @@
 package calendar;
 
 import static org.junit.Assert.assertTrue;
+
+import java.time.LocalDate;
+import java.time.Year;
+
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -17,17 +23,13 @@ public class Appointment {
 		this.terminKategorie.set(terminKategorie);
 	}
 
-	private StringProperty datum = new SimpleStringProperty();
+	//### DATUM  #### ///
+	//private ObjectProperty<LocalDate> datum = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
+	private ObjectProperty<LocalDate> datum = new SimpleObjectProperty<LocalDate>();
+	public LocalDate getDatum() {return datum.get();}
+	public void setDatum(LocalDate date) {	this.datum.set(date);	}
 
-	public String getDatum() {
-		return datum.get();
-
-	}
-
-	public void setDatum(String datum) {
-		this.datum.set(datum);
-	}
-
+	
 	private StringProperty startUhrzeit = new SimpleStringProperty();
 
 	public String getStartUhrzeit() {
@@ -69,9 +71,12 @@ public class Appointment {
 		termin.setTerminBezeichnung("Bez-ONE");
 		termin.setStartUhrzeit("19:30");
 		termin.setEndUhrzeit("18:00");
+		termin.setDatum(LocalDate.of(2015, 05, 29));
 		System.out.println(termin.getStartUhrzeit());
 		System.out.println(termin.getEndUhrzeit());
 		System.out.println(termin.getTerminBezeichnung());
+		System.out.println(termin.getDatum());
+		
 	}
 	
 }
