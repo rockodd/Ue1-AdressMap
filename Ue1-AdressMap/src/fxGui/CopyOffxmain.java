@@ -44,7 +44,7 @@ public class CopyOffxmain extends Application {
         
         //Editable TableView
         tableView.setEditable(true);
-         tableView.setOn(a -> handleTableEdit(a));
+        //tableView.setOn(a -> handleTableEdit(a));
         // Verhindert bei Übergröße das Anzeigen einer zusätzlichen Spalte, nur letzte Spalte wird vergrößert
         tableView.setColumnResizePolicy(tableView.CONSTRAINED_RESIZE_POLICY);
 		
