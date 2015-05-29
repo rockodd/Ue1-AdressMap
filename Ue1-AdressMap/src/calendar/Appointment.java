@@ -13,16 +13,10 @@ import javafx.beans.property.StringProperty;
 
 public class Appointment {
 
+	/// ### TERMINKATEGORIE ###///
 	private StringProperty terminKategorie = new SimpleStringProperty();
-
-	public String getTerminkategorie() {
-		return terminKategorie.get();
-
-	}
-
-	public void setTerminkategorie(String terminKategorie) {
-		this.terminKategorie.set(terminKategorie);
-	}
+	public String getTerminkategorie() {return terminKategorie.get();}
+	public void setTerminkategorie(String terminKategorie) {this.terminKategorie.set(terminKategorie);}
 
 	//### DATUM  #### ///
 	//private ObjectProperty<LocalDate> datum = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
@@ -35,7 +29,7 @@ public class Appointment {
 	public LocalTime getStartUhrzeit() {return startUhrzeit.get();}
 	public void setStartUhrzeit(LocalTime startTime) {this.startUhrzeit.set(startTime);}
 
-	/// ### ENDUHRZEIT ###///
+	/// ### ENDUHRZEIT ###/// // 1B //
 	private ObjectProperty<LocalTime> endUhrzeit = new SimpleObjectProperty<LocalTime>();
 	public LocalTime getEndUhrzeit() {return endUhrzeit.get();}
 	public void setEndUhrzeit(LocalTime endTime) throws BeforeException {
@@ -52,7 +46,7 @@ public class Appointment {
 	public String getTerminBeschreibung(){return terminBeschreibung.get();}
 	public void setTerminBeschreibung(String terminBeschreibung){this.terminBeschreibung.set(terminBeschreibung);}
 
-	/// ### MAIN METHODE ###///
+	/// ### MAIN METHODE ###/// // 1B //
 	public static void main(String[] args) {
 		Appointment termin = new Appointment();
 		termin.setTerminBezeichnung("Bez-ONE");
