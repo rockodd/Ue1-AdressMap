@@ -1,4 +1,4 @@
-package fxListEdit;
+package application;
 
 import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
@@ -19,6 +19,9 @@ public class ObservableContactDetails extends ContactDetails {
 		nameProperty = new SimpleStringProperty(name);
 		vornameProperty = new SimpleStringProperty(vorname);
 		adresseProperty = new SimpleStringProperty(adresse);
+		
+		
+		
 		
 		
 	}
