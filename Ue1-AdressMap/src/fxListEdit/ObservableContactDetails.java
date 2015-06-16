@@ -1,7 +1,9 @@
 package fxListEdit;
 
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.util.Callback;
 import AdressBook.ContactDetails;
 
 public class ObservableContactDetails extends ContactDetails {
@@ -20,6 +22,11 @@ public class ObservableContactDetails extends ContactDetails {
 		
 		
 	}
+	
+	//Returns
+	public static Callback<ObservableContactDetails, Observable[]> getObsContactDetails() {
+		   return (ObservableContactDetails p) -> new Observable[]{p.nameProperty, p.vornameProperty, p.adresseProperty};
+		}
 	
 
 
