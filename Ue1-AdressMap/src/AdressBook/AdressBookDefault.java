@@ -35,6 +35,14 @@ public class AdressBookDefault extends AddressBook {
 			e.printStackTrace();
 		}
 		try {
+			addDetails(new ContactDetails("Sepp", "Blatter", "Korruptionsweg 900"));
+		} catch (DoppelException | ParamKeyIsNullException
+				| ParamKeyIsEmptyException | ParamContactIsNullException
+				| ParamContactIsEmptyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
 			addDetails(new ContactDetails("Frodo", "Beutling", "Auenland 4"));
 		} catch (DoppelException | ParamKeyIsNullException
 				| ParamKeyIsEmptyException | ParamContactIsNullException
