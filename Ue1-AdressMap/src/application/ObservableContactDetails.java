@@ -50,7 +50,10 @@ public class ObservableContactDetails extends ContactDetails {
 	public void setAdresse(String anschrift) {
 		adresseProperty.set(anschrift);
 	}
-
+	
+	public void getall() {
+		return List(vornameProperty,nameProperty,adresseProperty);
+	}
 	//public String toString() {
 	//
 	//    return vornameProperty.getValue();

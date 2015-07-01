@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
+import CsvAdressbook.*;
 
 public class Control {
 
@@ -22,6 +23,7 @@ public class Control {
 	private Button											btnadd;
 	private Button											btnsave;
 	private Button											btnload;
+	 													
 
 	public Control(ListView<ObservableContactDetails> listViewIN,
 			TableView<ObservableContactDetails> tableViewIN, Button btnprintIN,
@@ -41,7 +43,7 @@ public class Control {
 		// Button listener
 		btnprint.setOnAction(i -> printalles());
 		btnadd.setOnAction(i -> addcontact());
-		btnsave.setOnAction(i -> writeEntityList(obserContactDetailsList.toArray(),"/test.txt",";"));
+		btnsave.setOnAction(i -> CSVContactsWriter.writeEntityList(obserContactDetailsList.,"/test.txt",";"));
 //		btnload.setOnAction(i -> addcontact());	
 		
 
@@ -111,6 +113,14 @@ public class Control {
 			System.out.println("Vorname: " + i.getVornameProperty().getValue()
 					+ "\t Nachname: " + i.getNameProperty().getValue()
 					+ "\t Adresse: " + i.getAdresseProperty().getValue());
+		}
+		
+		private void printalles() {
+			for (ObservableContactDetails i : obserContactDetailsList) {
+				System.out.println("Vorname: " + i.getVornameProperty().getValue()
+						+ "\t Nachname: " + i.getNameProperty().getValue()
+						+ "\t Adresse: " + i.getAdresseProperty().getValue());
+			}
 		}
 	}
 

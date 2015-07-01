@@ -22,10 +22,11 @@ public class CSVContactsReader {
 		List<String> lines = Files.readAllLines(source);
 		for (String line : lines){
 			try{
-				target.add(new ObservableContactDetails(line.split(splitter)));
+				String[] detailsarray = line.split(splitter);
+				target.add(new ObservableContactDetails(detailsarray[0],detailsarray[1],detailsarray[2]));
 		
 		} catch (Exception e) {e.printStackTrace(System.err);
-			target.add(new ObservableContactDetails());
+			target.add(new ObservableContactDetails("new","new","new"));
 			}
 		}
 	} catch (IOException e)	{e.printStackTrace(System.err);
