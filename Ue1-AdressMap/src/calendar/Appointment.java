@@ -33,6 +33,7 @@ public class Appointment {
 	private ObjectProperty<LocalTime> endUhrzeit = new SimpleObjectProperty<LocalTime>();
 	public LocalTime getEndUhrzeit() {return endUhrzeit.get();}
 	public void setEndUhrzeit(LocalTime endTime) throws BeforeException {
+		if(getStartUhrzeit()==null) throw new BeforeException();
 		if(endTime.isBefore(getStartUhrzeit())) throw new BeforeException();
 		this.endUhrzeit.set(endTime);}
 
@@ -50,14 +51,16 @@ public class Appointment {
 	public static void main(String[] args) {
 		Appointment termin = new Appointment();
 		termin.setTerminBezeichnung("Bez-ONE");
-		termin.setStartUhrzeit(LocalTime.of(12, 20));
+		
 		try {
 			termin.setEndUhrzeit(LocalTime.of(11, 20));
 		} catch (BeforeException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		termin.setStartUhrzeit(LocalTime.of(12, 20));
 		termin.setDatum(LocalDate.of(2015, 05, 29));
+		
 		System.out.println(termin.getStartUhrzeit());
 		System.out.println(termin.getEndUhrzeit());
 		System.out.println(termin.getTerminBezeichnung());

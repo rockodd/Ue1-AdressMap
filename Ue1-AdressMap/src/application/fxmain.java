@@ -21,17 +21,19 @@ public class fxmain extends Application {
 		//Button erzeugen
 		Button btnprint = new Button("DRUCK");
 		Button btnadd = new Button("NEU");
+		Button btnsav = new Button("SPEICHERN");
+		Button btnload = new Button("LADEN");
 
 		// ListView und TableView erzeugen
 		final ListView<ObservableContactDetails> listView = new ListView<ObservableContactDetails>();
 		final TableView<ObservableContactDetails> tableView = new TableView<ObservableContactDetails>();
 		// Control starten und Objekte übergeben
-		new Control(listView, tableView, btnprint, btnadd);
+		new Control(listView, tableView, btnprint, btnadd, btnsav, btnload);
 
 		// ListView und TableView auf der BorderPane platzieren
 		root.setLeft(listView);
 		root.setCenter(tableView);
-		hbox.getChildren().addAll(btnprint, btnadd);
+		hbox.getChildren().addAll(btnprint, btnadd, btnsav, btnload);
 		root.setBottom(hbox);
 		// Scene erstellen und auf PrimaryStage anzeigen
 		Scene scene = new Scene(root);

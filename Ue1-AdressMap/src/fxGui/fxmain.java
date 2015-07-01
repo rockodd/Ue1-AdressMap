@@ -21,19 +21,19 @@ public class fxmain extends Application {
 		BorderPane root = new BorderPane();
 		
 		// ListView und TableView erzeugen
-		final ListView listView = new ListView();
-		final TableView tableView = new TableView();
+		final ListView<ContactDetails> listView = new ListView<ContactDetails>();
+		final TableView<ContactDetails> tableView = new TableView<ContactDetails>();
 		
 		// observableArrayList für TableView (Werden für FX Views benötigt um Listen zu übergeben)
 	    ObservableList <ContactDetails> ContactDetailsList = FXCollections.observableArrayList(meinAdressbuch.allDetails());
 		
 		// observableArrayList für die ListView mit allen Keys
-	    ObservableList keyList = FXCollections.observableArrayList(meinAdressbuch.allKeys());
+	    ObservableList<?> keyList = FXCollections.observableArrayList(meinAdressbuch.allKeys());
 	    
 	    // Spalten für die TableView anlegen
-        TableColumn firstNameCol = new TableColumn("Vorname");
-        TableColumn lastNameCol = new TableColumn("Nachname");
-        TableColumn adressCol = new TableColumn("Adresse");
+        TableColumn<ContactDetails, String> firstNameCol = new TableColumn<ContactDetails, String>("Vorname");
+        TableColumn<ContactDetails, String> lastNameCol = new TableColumn<ContactDetails, String>("Nachname");
+        TableColumn<ContactDetails, String> adressCol = new TableColumn<ContactDetails, String>("Adresse");
         firstNameCol.setCellValueFactory( new PropertyValueFactory<ContactDetails, String>("vorname"));
         lastNameCol.setCellValueFactory( new PropertyValueFactory<ContactDetails, String>("name"));
         adressCol.setCellValueFactory( new PropertyValueFactory<ContactDetails, String>("adresse"));
@@ -44,7 +44,7 @@ public class fxmain extends Application {
         tableView.setColumnResizePolicy(tableView.CONSTRAINED_RESIZE_POLICY);
 		
         // Zellwerte der ListView und der TableView mit unseren Daten füllen 
-		listView.setItems(keyList);
+		listView.setItems((ObservableList<ContactDetails>) keyList);
 		tableView.setItems(ContactDetailsList);		
 		
 		// ListView und TableView auf der BorderPane platzieren

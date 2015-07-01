@@ -20,15 +20,19 @@ public class Control {
 	private TableView<ObservableContactDetails>	tableView;
 	private Button											btnprint;
 	private Button											btnadd;
+	private Button											btnsave;
+	private Button											btnload;
 
 	public Control(ListView<ObservableContactDetails> listViewIN,
 			TableView<ObservableContactDetails> tableViewIN, Button btnprintIN,
-			Button btnaddIN) {
+			Button btnaddIN, Button btnsavIN, Button btnloadIN) {
 		// Übergabeobjekte übernehmen
 		this.listView = listViewIN;
 		this.tableView = tableViewIN;
 		this.btnprint = btnprintIN;
 		this.btnadd = btnaddIN;
+		this.btnsave = btnsavIN;
+		this.btnload = btnloadIN;
 
 		obserContactDetailsList = FXCollections
 				.observableArrayList(ObservableContactDetails
@@ -37,6 +41,9 @@ public class Control {
 		// Button listener
 		btnprint.setOnAction(i -> printalles());
 		btnadd.setOnAction(i -> addcontact());
+		btnsave.setOnAction(i -> writeEntityList(obserContactDetailsList.toArray(),"/test.txt",";"));
+//		btnload.setOnAction(i -> addcontact());	
+		
 
 		// observableArrayList für TableView (Werden für FX Views benötigt um
 		// Listen zu übergeben)
