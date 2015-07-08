@@ -7,26 +7,26 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import application.ObservableContactDetails;
+import application.Appointment;
 import AdressBook.ContactDetails;
 
 public class CSVContactsReader {
 
-	public static List<ObservableContactDetails> readEntityList(String dateiname, String splitter) {
+	public static List<Appointment> readEntityList(String dateiname, String splitter) {
 		Path source = Paths.get(dateiname + ".csv");
-		return readEntityList(dateiname, splitter);
+		return readEntityList(source, splitter);
 	}
-	public static List<ObservableContactDetails> readEntityList(Path source, String splitter) {
-		List<ObservableContactDetails> target = new ArrayList<>();
+	public static List<Appointment> readEntityList(Path source, String splitter) {
+		List<Appointment> target = new ArrayList<>();
 		try {
 		List<String> lines = Files.readAllLines(source);
 		for (String line : lines){
 			try{
 				String[] detailsarray = line.split(splitter);
-				target.add(new ObservableContactDetails(detailsarray[0],detailsarray[1],detailsarray[2]));
+				target.add(new Appointment(detailsarray[0],detailsarray[1],detailsarray[2]));
 		
 		} catch (Exception e) {e.printStackTrace(System.err);
-			target.add(new ObservableContactDetails("new","new","new"));
+			target.add(new Appointment("new","new","new"));
 			}
 		}
 	} catch (IOException e)	{e.printStackTrace(System.err);

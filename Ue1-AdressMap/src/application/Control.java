@@ -14,22 +14,23 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import CsvAdressbook.*;
 
 public class Control {
 
-	ObservableList<ObservableContactDetails>		obserContactDetailsList;
-	private ListView<ObservableContactDetails>	listView;
-	private TableView<ObservableContactDetails>	tableView;
+	ObservableList<Appointment>		obserContactDetailsList;
+	private ListView<Appointment>	listView;
+	private TableView<Appointment>	tableView;
 	private Button											btnprint;
 	private Button											btnadd;
 	private Button											btnsave;
 	private Button											btnload;
 	 													
 
-	public Control(ListView<ObservableContactDetails> listViewIN,
-			TableView<ObservableContactDetails> tableViewIN, Button btnprintIN,
+	public Control(ListView<Appointment> listViewIN,
+			TableView<Appointment> tableViewIN, Button btnprintIN,
 			Button btnaddIN, Button btnsavIN, Button btnloadIN) {
 		// Übergabeobjekte übernehmen
 		this.listView = listViewIN;
@@ -39,10 +40,13 @@ public class Control {
 		this.btnsave = btnsavIN;
 		this.btnload = btnloadIN;
 
-		obserContactDetailsList = FXCollections
-				.observableArrayList(ObservableContactDetails
-						.getObsContactDetails());
+//		obserContactDetailsList = FXCollections
+//				.observableArrayList(ObservableContactDetails
+//						.getObsContactDetails());
 
+		obserContactDetailsList = FXCollections
+				.observableArrayList();
+		
 		// Button listener
 
 		btnprint.setOnAction(i -> printalles());
@@ -53,11 +57,11 @@ public class Control {
 
 		// observableArrayList für TableView (Werden für FX Views benötigt um
 		// Listen zu übergeben)
-		obserContactDetailsList.addAll(new ObservableContactDetails("Peter",
+		obserContactDetailsList.addAll(new Appointment("Peter",
 				"Panner", "Nimmerland 3"));
-		obserContactDetailsList.addAll(new ObservableContactDetails("Sepp",
+		obserContactDetailsList.addAll(new Appointment("Sepp",
 				"Blatter", "Korruptionsweg 900"));
-		obserContactDetailsList.addAll(new ObservableContactDetails("Frodo",
+		obserContactDetailsList.addAll(new Appointment("Frodo",
 				"Beutling", "Auenland 4"));
 
 		// observableArrayList für die ListView mit allen Keys
@@ -65,11 +69,11 @@ public class Control {
 		// FXCollections.observableArrayList();
 
 		// Spalten für die TableView anlegen
-		TableColumn<ObservableContactDetails, String> firstNameCol = new TableColumn<ObservableContactDetails, String>(
+		TableColumn<Appointment, String> firstNameCol = new TableColumn<Appointment, String>(
 				"Vorname");
-		TableColumn<ObservableContactDetails, String> lastNameCol = new TableColumn<ObservableContactDetails, String>(
+		TableColumn<Appointment, String> lastNameCol = new TableColumn<Appointment, String>(
 				"Nachname");
-		TableColumn<ObservableContactDetails, String> adressCol = new TableColumn<ObservableContactDetails, String>(
+		TableColumn<Appointment, String> adressCol = new TableColumn<Appointment, String>(
 				"Adresse");
 
 		// Lambda zum füllen der Spalten
@@ -85,32 +89,34 @@ public class Control {
 		// Spalten der Tableview übergeben
 		tableView.getColumns().addAll(firstNameCol, lastNameCol, adressCol);
 
-		// Editable TableView
+		// Editable TableView / ListView
 		tableView.setEditable(true);
+		listView.setEditable(true);
 
 		// Verhindert bei Übergröße das Anzeigen einer zusätzlichen Spalte, nur
 		// letzte Spalte wird vergrößert
 		tableView.setColumnResizePolicy(tableView.CONSTRAINED_RESIZE_POLICY);
 
 		// der TableView und ListView die Liste mit unseren ObservableContactDetails übergeben
-		tableView.setItems(obserContactDetailsList);
-		listView.setItems(obserContactDetailsList);
-		listView.setEditable(true);
+		tableView.itemsProperty().setValue(obserContactDetailsList);
+		listView.itemsProperty().setValue(obserContactDetailsList);
+		
 
 		// ruft eigene listCellMethode auf
-		listView.setCellFactory(p -> new MyListCell());
+		//listView.setCellFactory(TextFieldListCell.forListView());
 
 	}
 
 	private Object loadFile() {
-		List<ObservableContactDetails> obserlist = CSVContactsReader.readEntityList("test",";");
+		List<Appointment> obserlist = CSVContactsReader.readEntityList("test",";");
 		obserContactDetailsList.clear();
-		for (ObservableContactDetails contact : obserlist) obserContactDetailsList.addAll(contact);
+		for (Appointment contact : obserlist) obserContactDetailsList.addAll(contact);
 		return null;
 	}
 
 	private Object writeFile() {
-		ObservableList<ObservableContactDetails> obserlist = obserContactDetailsList;
+		printalles();
+		List<Appointment> obserlist = obserContactDetailsList;
 		try {
 			CSVContactsWriter.writeEntityList(obserlist,"test",";");
 		} catch (IOException e) {
@@ -122,7 +128,7 @@ public class Control {
 
 	// Methode um neuen leeren Kontakt anzulegen
 	private Object addcontact() {
-		ObservableContactDetails newContact = new ObservableContactDetails(
+		Appointment newContact = new Appointment(
 				"Vorname", "Nachname", "Adresse");
 		obserContactDetailsList.addAll(newContact);
 		return null;
@@ -131,7 +137,7 @@ public class Control {
 	// Methode um alles aus der Observable Contact Details Liste auf der Konsole
 	// auszugeben
 	private void printalles() {
-		for (ObservableContactDetails i : obserContactDetailsList) {
+		for (Appointment i : obserContactDetailsList) {
 			System.out.println("Vorname: " + i.getVornameProperty().getValue()
 					+ "\t Nachname: " + i.getNameProperty().getValue()
 					+ "\t Adresse: " + i.getAdresseProperty().getValue());
@@ -139,6 +145,9 @@ public class Control {
 		}
 	}
 
+
+
+/* ################ besser mit .. (ilse folie zusammenfassung).. arbeiten
 	// eigene ListCell für die ListView, da die ListVIew mit selbst definierten
 	// Objekten nicht umgehen kann
 	class MyListCell extends ListCell<ObservableContactDetails> {
@@ -181,5 +190,7 @@ public class Control {
 				setText(nameProperty.get());
 			}
 		}
-	}
+		
+		}
+		*/
 

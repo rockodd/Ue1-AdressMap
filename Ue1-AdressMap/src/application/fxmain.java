@@ -27,8 +27,8 @@ public class fxmain extends Application {
 		Button btnload = new Button("LADEN");
 
 		// ListView und TableView erzeugen
-		final ListView<ObservableContactDetails> listView = new ListView<ObservableContactDetails>();
-		final TableView<ObservableContactDetails> tableView = new TableView<ObservableContactDetails>();
+		final ListView<Appointment> listView = new ListView<Appointment>();
+		final TableView<Appointment> tableView = new TableView<Appointment>();
 		// Control starten und Objekte übergeben
 		new Control(listView, tableView, btnprint, btnadd, btnsav, btnload);
 

@@ -12,6 +12,34 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Appointment {
+	
+	public Appointment() {
+		super();
+		this.terminKategorie = new SimpleStringProperty("Termin-Kategorie");
+		this.datum = new SimpleObjectProperty<LocalDate>((LocalDate.of(2000, 1, 1)));
+		this.startUhrzeit = new SimpleObjectProperty<LocalTime>(LocalTime.of(00, 00));
+		this.endUhrzeit = new SimpleObjectProperty<LocalTime>(LocalTime.of(23, 59));
+		this.terminBezeichnung = new SimpleStringProperty("Termin-Bezeichung");
+		this.terminBeschreibung = new SimpleStringProperty("Termin-Beschreibung");
+		
+	}
+	
+	// Konstruktor
+	public Appointment(String terminKategorie,
+			LocalDate datum,
+			LocalTime startUhrzeit,
+			LocalTime endUhrzeit,
+			String terminBezeichnung, 
+			String terminBeschreibung) {
+		super();
+		this.terminKategorie = new SimpleStringProperty(terminKategorie);
+		this.datum = new SimpleObjectProperty<LocalDate>(datum);
+		this.startUhrzeit = new SimpleObjectProperty<LocalTime>(startUhrzeit);
+		this.endUhrzeit = new SimpleObjectProperty<LocalTime>(endUhrzeit);
+		this.terminBezeichnung = new SimpleStringProperty(terminBezeichnung);
+		this.terminBeschreibung = new SimpleStringProperty(terminBeschreibung);
+	}
+
 
 	/// ### TERMINKATEGORIE ###///
 	private StringProperty terminKategorie = new SimpleStringProperty();
@@ -49,17 +77,9 @@ public class Appointment {
 
 	/// ### MAIN METHODE ###/// // 1B //
 	public static void main(String[] args) {
-		Appointment termin = new Appointment();
-		termin.setTerminBezeichnung("Bez-ONE");
+		Appointment termin = new Appointment("Kat 1",LocalDate.of(2015, 05, 29),LocalTime.of(12, 20),LocalTime.of(11, 20), "Termin1", "TERMIN und so");
 		
-		try {
-			termin.setEndUhrzeit(LocalTime.of(11, 20));
-		} catch (BeforeException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		termin.setStartUhrzeit(LocalTime.of(12, 20));
-		termin.setDatum(LocalDate.of(2015, 05, 29));
+		
 		
 		System.out.println(termin.getStartUhrzeit());
 		System.out.println(termin.getEndUhrzeit());

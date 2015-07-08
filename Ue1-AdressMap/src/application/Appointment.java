@@ -6,12 +6,12 @@ import javafx.beans.property.StringProperty;
 import javafx.util.Callback;
 import AdressBook.ContactDetails;
 
-public class ObservableContactDetails extends ContactDetails {
+public class Appointment extends ContactDetails {
 	private StringProperty	nameProperty;
 	private StringProperty	vornameProperty;
 	private StringProperty	adresseProperty;
 
-	public ObservableContactDetails(String vorname, String name, String adresse) {
+	public Appointment(String vorname, String name, String adresse) {
 		// constructor , super ruft alte ContactDetails mit auf. 
 		super(vorname, name, adresse);
 
@@ -22,10 +22,10 @@ public class ObservableContactDetails extends ContactDetails {
 	}
 
 	//Returns
-	public static Callback<ObservableContactDetails, Observable[]> getObsContactDetails() {
-		return (ObservableContactDetails p) -> new Observable[] { p.nameProperty,
-				p.vornameProperty, p.adresseProperty };
-	}
+//	public static Callback<ObservableContactDetails, Observable[]> getObsContactDetails() {
+//		return (ObservableContactDetails p) -> new Observable[] { p.nameProperty,
+//				p.vornameProperty, p.adresseProperty };
+//	}
 
 	public StringProperty getNameProperty() {
 		return nameProperty;
@@ -50,9 +50,9 @@ public class ObservableContactDetails extends ContactDetails {
 	public void setAdresse(String anschrift) {
 		adresseProperty.set(anschrift);
 	}
-	//public String toString() {
-	//
-	//    return vornameProperty.getValue();
-	//}
+	public String toString() {
+	
+	    return vornameProperty.getValue();
+	}
 
 }
