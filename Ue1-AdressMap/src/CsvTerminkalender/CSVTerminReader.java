@@ -23,7 +23,7 @@ public class CSVTerminReader {
 		List<String> lines = Files.readAllLines(source);
 		for (String line : lines){
 			try{
-				target.add(new Appointment(line.split(splitter)));
+				//target.add(new Appointment(line.split(splitter)));
 		
 		} catch (Exception e) {e.printStackTrace(System.err);
 			target.add(new Appointment());

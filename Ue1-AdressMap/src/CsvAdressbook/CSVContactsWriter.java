@@ -17,13 +17,13 @@ public class CSVContactsWriter {
 
 	final static Charset ENCODING = StandardCharsets.UTF_8;
 
-	public void writeEntityList(List<ObservableContactDetails> contact,
+	public static void writeEntityList(List<ObservableContactDetails> contact,
 			String filename, String splitter) throws IOException {
-		Path path = Paths.get("ausgabe/" + filename + ".csv");
+		Path path = Paths.get(filename + ".csv");
 		writeEntityList(contact, path, splitter);
 	}
 
-	public void writeEntityList(List<ObservableContactDetails> contact,
+	public static void writeEntityList(List<ObservableContactDetails> contact,
 			Path path, String splitter) throws IOException {
 		List<String> lines = new ArrayList<>();
 		for (ObservableContactDetails contacts : contact) {
@@ -32,7 +32,7 @@ public class CSVContactsWriter {
 		Files.write(path, lines, ENCODING);
 	}
 
-	private String ObservableContactDetailsAsCSVLine(
+	private static String ObservableContactDetailsAsCSVLine(
 			ObservableContactDetails c, String splitter) {
 		return c.getName() + splitter + c.getVorname() + splitter
 				+ c.getAdresse() + splitter;

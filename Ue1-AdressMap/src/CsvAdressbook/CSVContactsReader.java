@@ -13,7 +13,7 @@ import AdressBook.ContactDetails;
 public class CSVContactsReader {
 
 	public static List<ObservableContactDetails> readEntityList(String dateiname, String splitter) {
-		Path source = Paths.get(dateiname);
+		Path source = Paths.get(dateiname + ".csv");
 		return readEntityList(dateiname, splitter);
 	}
 	public static List<ObservableContactDetails> readEntityList(Path source, String splitter) {

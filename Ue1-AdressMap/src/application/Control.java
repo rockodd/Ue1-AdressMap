@@ -1,5 +1,8 @@
 package application;
 
+import java.io.IOException;
+import java.util.List;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -41,10 +44,11 @@ public class Control {
 						.getObsContactDetails());
 
 		// Button listener
+
 		btnprint.setOnAction(i -> printalles());
 		btnadd.setOnAction(i -> addcontact());
-		btnsave.setOnAction(i -> CSVContactsWriter.writeEntityList(obserContactDetailsList.,"/test.txt",";"));
-//		btnload.setOnAction(i -> addcontact());	
+		btnsave.setOnAction(i -> writeFile());
+		btnload.setOnAction(i -> loadFile());
 		
 
 		// observableArrayList für TableView (Werden für FX Views benötigt um
@@ -98,11 +102,29 @@ public class Control {
 
 	}
 
+	private Object loadFile() {
+		List<ObservableContactDetails> obserlist = CSVContactsReader.readEntityList("test",";");
+		obserContactDetailsList.clear();
+		for (ObservableContactDetails contact : obserlist) obserContactDetailsList.addAll(contact);
+		return null;
+	}
+
+	private Object writeFile() {
+		ObservableList<ObservableContactDetails> obserlist = obserContactDetailsList;
+		try {
+			CSVContactsWriter.writeEntityList(obserlist,"test",";");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	// Methode um neuen leeren Kontakt anzulegen
 	private Object addcontact() {
 		ObservableContactDetails newContact = new ObservableContactDetails(
 				"Vorname", "Nachname", "Adresse");
-		obserContactDetailsList.add(newContact);
+		obserContactDetailsList.addAll(newContact);
 		return null;
 	}
 
@@ -114,13 +136,6 @@ public class Control {
 					+ "\t Nachname: " + i.getNameProperty().getValue()
 					+ "\t Adresse: " + i.getAdresseProperty().getValue());
 		}
-		
-		private void printalles() {
-			for (ObservableContactDetails i : obserContactDetailsList) {
-				System.out.println("Vorname: " + i.getVornameProperty().getValue()
-						+ "\t Nachname: " + i.getNameProperty().getValue()
-						+ "\t Adresse: " + i.getAdresseProperty().getValue());
-			}
 		}
 	}
 
@@ -168,4 +183,3 @@ public class Control {
 		}
 	}
 
-}

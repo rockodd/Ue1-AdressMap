@@ -1,5 +1,7 @@
 package application;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,7 +15,7 @@ public class fxmain extends Application {
 	// observableArrayList für TableView (Werden für FX Views benötigt um Listen zu übergeben)
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws IOException {
 		primaryStage.setTitle("edit Lists GUI");
 		BorderPane root = new BorderPane();
 		HBox hbox = new HBox();
