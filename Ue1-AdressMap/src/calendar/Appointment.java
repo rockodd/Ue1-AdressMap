@@ -41,9 +41,9 @@ public class Appointment {
 	private StringProperty terminBezeichnung = new SimpleStringProperty();
 	public String getTerminBezeichnung(){return terminBezeichnung.get();}
 	public void setTerminBezeichnung(String terminBezeichnung){this.terminBezeichnung.set(terminBezeichnung);}
-	private StringProperty terminBeschreibung = new SimpleStringProperty();
 	
 	/// ### TERMINBESCHREIBUNG ###///
+	private StringProperty terminBeschreibung = new SimpleStringProperty();
 	public String getTerminBeschreibung(){return terminBeschreibung.get();}
 	public void setTerminBeschreibung(String terminBeschreibung){this.terminBeschreibung.set(terminBeschreibung);}
 

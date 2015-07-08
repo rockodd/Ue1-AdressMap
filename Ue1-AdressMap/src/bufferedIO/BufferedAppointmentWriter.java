@@ -26,8 +26,7 @@ public class BufferedAppointmentWriter {
 				+ appointment.getTerminBezeichnung() + splitter
 				+ appointment.getStartUhrzeit() + splitter
 				+ appointment.getEndUhrzeit() + splitter
-				+ appointment.getTerminkategorie() + splitter
-				+ appointment.getDatum() + splitter;
+				+ appointment.getTerminkategorie() + splitter;
 	}
 
 

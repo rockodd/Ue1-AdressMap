@@ -14,7 +14,7 @@ public class CSVContactsReader {
 
 	public static List<ObservableContactDetails> readEntityList(String dateiname, String splitter) {
 		Path source = Paths.get(dateiname + ".csv");
-		return readEntityList(dateiname, splitter);
+		return readEntityList(source, splitter);
 	}
 	public static List<ObservableContactDetails> readEntityList(Path source, String splitter) {
 		List<ObservableContactDetails> target = new ArrayList<>();

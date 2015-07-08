@@ -22,11 +22,11 @@ public class Control {
 	ObservableList<ObservableContactDetails>		obserContactDetailsList;
 	private ListView<ObservableContactDetails>	listView;
 	private TableView<ObservableContactDetails>	tableView;
-	private Button											btnprint;
-	private Button											btnadd;
-	private Button											btnsave;
-	private Button											btnload;
-	 													
+	private Button		btnprint;
+	private Button		btnadd;
+	private Button		btnsave;
+	private Button		btnload;
+	 											
 
 	public Control(ListView<ObservableContactDetails> listViewIN,
 			TableView<ObservableContactDetails> tableViewIN, Button btnprintIN,

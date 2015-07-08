@@ -14,21 +14,21 @@ public class BufferedAppointmentReader {
 		public List<Appointment> readAppointment(String filename, String splitter) throws IOException {
 			String path = filename + ".txt";
 			List<Appointment> inputListe = new ArrayList();
-			BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream (path)));
-			String lesen = input.readLine();
-			LocalDate [] attribute = lesen.split(splitter);
-			String [] wert = lesen.split(splitter);
+			BufferedReader inBuf = new BufferedReader(new InputStreamReader(new FileInputStream (path)));
+			String einlesen = inBuf.readLine();
+			LocalDate [] attribute = einlesen.split(splitter);
+			//String [] wert = einlesen.split(splitter);
 			int index = 0;
-			for(int i = 0; i < attribute.length / 6; i++) {
+			for(int i = 0; i < attribute.length / 5; i++) {
 				Appointment appointment = new Appointment();
 				appointment.setDatum(attribute[index++]);
-				appointment.setTerminbezeichnung(wert[index++]);
+				appointment.setTerminbezeichnung(attribute[index++]);
 				appointment.setStartUhrzeit(attribute[index++]);
 				appointment.setEndUhrzeit(attribute[index++]);
 				appointment.setTerminkategorie(attribute[index++]);
 				inputListe.add(appointment);
 			}
-			input.close();
+			inBuf.close();
 			return inputListe;
 		}
 
