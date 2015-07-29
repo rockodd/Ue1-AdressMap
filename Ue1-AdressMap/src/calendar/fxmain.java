@@ -1,4 +1,4 @@
-package application;
+package calendar;
 
 import java.io.IOException;
 
@@ -27,13 +27,11 @@ public class fxmain extends Application {
 		Button btnload = new Button("LADEN");
 
 		// ListView und TableView erzeugen
-		final ListView<ObservableContactDetails> listView = new ListView<ObservableContactDetails>();
-		final TableView<ObservableContactDetails> tableView = new TableView<ObservableContactDetails>();
+		final TableView<Appointment> tableView = new TableView<Appointment>();
 		// Control starten und Objekte übergeben
-		new Control(listView, tableView, btnprint, btnadd, btnsav, btnload);
+		new Control(tableView, btnprint, btnadd, btnsav, btnload);
 
-		// ListView und TableView auf der BorderPane platzieren
-		root.setLeft(listView);
+		// TableView auf der BorderPane platzieren
 		root.setCenter(tableView);
 		hbox.getChildren().addAll(btnprint, btnadd, btnsav, btnload);
 		root.setBottom(hbox);

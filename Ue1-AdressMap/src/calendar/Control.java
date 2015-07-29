@@ -11,32 +11,36 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.control.cell.TextFieldTableCell;
 import CsvAdressbook.*;
+import CsvTerminkalender.BinAppointmentReader;
+import CsvTerminkalender.BinAppointmentWriter;
+import CsvTerminkalender.BufferedAppointmentReader;
+import CsvTerminkalender.BufferedAppointmentWriter;
 import CsvTerminkalender.CSVTerminReader;
 import CsvTerminkalender.CSVTerminWriter;
 
 public class Control {
 
 	ObservableList<Appointment>		obserAppointmentList;
-	private ListView<Appointment>		listView;
 	private TableView<Appointment>	tableView;
 	private Button							btnprint;
 	private Button							btnadd;
 	private Button							btnsave;
 	private Button							btnload;
 
-	public Control(ListView<Appointment> listViewIN,
+	public Control(
 			TableView<Appointment> tableViewIN, Button btnprintIN,
 			Button btnaddIN, Button btnsavIN, Button btnloadIN) {
 		// Übergabeobjekte übernehmen
-		this.listView = listViewIN;
 		this.tableView = tableViewIN;
 		this.btnprint = btnprintIN;
 		this.btnadd = btnaddIN;
@@ -68,29 +72,41 @@ public class Control {
 				07, 01), LocalTime.of(9, 00), LocalTime.of(14, 00), "Termin3",
 				"andere Tag"));
 
-		//		// Spalten für die TableView anlegen
-		//		TableColumn<Appointment, String> katCol = new TableColumn<Appointment, String>("Vorname");
-		//		TableColumn<ObservableContactDetails, String> lastNameCol = new TableColumn<ObservableContactDetails, String>(
-		//				"Nachname");
-		//		TableColumn<ObservableContactDetails, String> adressCol = new TableColumn<ObservableContactDetails, String>(
-		//				"Adresse");
-		//
-		//		// Lambda zum füllen der Spalten
-		//		firstNameCol.setCellValueFactory(e -> e.getValue().getVornameProperty());
-		//		lastNameCol.setCellValueFactory(e -> e.getValue().getNameProperty());
-		//		adressCol.setCellValueFactory(e -> e.getValue().getAdresseProperty());
-		//
-		//		// Textfelder setzen für editierbarkeit
-		//		firstNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-		//		lastNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
-		//		adressCol.setCellFactory(TextFieldTableCell.forTableColumn());
-		//
-		//		// Spalten der Tableview übergeben
-		//		tableView.getColumns().addAll(firstNameCol, lastNameCol, adressCol);
+				// Spalten für die TableView anlegen
+				TableColumn<Appointment, String> katCol = new TableColumn<Appointment, String>("Kategorie");
+				TableColumn<Appointment, String> bezCol = new TableColumn<Appointment, String>("Bezeichnung");
+				TableColumn<Appointment, String> beschCol = new TableColumn<Appointment, String>("Beschreibung");
+				TableColumn<Appointment, LocalDate> datCol = new TableColumn<Appointment, LocalDate>("Datum");
+				TableColumn<Appointment, LocalTime> startCol = new TableColumn<Appointment, LocalTime>("Beginn");
+				TableColumn<Appointment, LocalTime> endeCol = new TableColumn<Appointment, LocalTime>("Ende");
+		
+				// Lambda zum füllen der Spalten
+				katCol.setCellValueFactory(e -> e.getValue().getTerminkategorie());
+				bezCol.setCellValueFactory(e -> e.getValue().getTerminBezeichnung());
+				beschCol.setCellValueFactory(e -> e.getValue().getTerminBeschreibung());
+				datCol.setCellValueFactory(e -> e.getValue().getDatum());
+				startCol.setCellValueFactory(e -> e.getValue().getStartUhrzeit());
+				endeCol.setCellValueFactory(e -> e.getValue().getEndUhrzeit());
+				
+				//datCol.setText(DateUtil.format();
+		        //birthdayField.setText(DateUtil.format(person.getBirthday()));
+		        //birthdayField.setPromptText("dd.mm.yyyy");
+
+		
+				// Textfelder setzen für editierbarkeit
+				katCol.setCellFactory(TextFieldTableCell.forTableColumn());
+				bezCol.setCellFactory(TextFieldTableCell.forTableColumn());
+				beschCol.setCellFactory(TextFieldTableCell.forTableColumn());
+//				datCol.setCellFactory(TextFieldTableCell.forTableColumn());
+//				datCol.setCellFactory(c -> new TableCell<>());
+//				startCol.setCellFactory(TextFieldTableCell.forTableColumn());
+//				endeCol.setCellFactory(TextFieldTableCell.forTableColumn());
+		
+				// Spalten der Tableview übergeben
+				tableView.getColumns().addAll(katCol, bezCol, beschCol, datCol, startCol, endeCol);
 
 		// Editable TableView / ListView
 		tableView.setEditable(true);
-		listView.setEditable(true);
 
 		// Verhindert bei Übergröße das Anzeigen einer zusätzlichen Spalte, nur
 		// letzte Spalte wird vergrößert
@@ -98,7 +114,6 @@ public class Control {
 
 		// der TableView und ListView die Liste mit unseren ObservableContactDetails übergeben
 		tableView.itemsProperty().setValue(obserAppointmentList);
-		listView.itemsProperty().setValue(obserAppointmentList);
 
 		// ruft eigene listCellMethode auf
 		//listView.setCellFactory(TextFieldListCell.forListView());
@@ -106,8 +121,13 @@ public class Control {
 	}
 
 	private Object loadFile() {
-		List<Appointment> obserlist = CSVTerminReader.readAppointment("Termine",
-				";");
+		List<Appointment> obserlist = null;
+		try {
+			obserlist = BinAppointmentReader.readAppointment("Termine",";");
+		} catch (IOException | BeforeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		obserAppointmentList.clear();
 		
 		for (Appointment contact : obserlist)
@@ -119,7 +139,7 @@ public class Control {
 		printalles();
 		List<Appointment> obserlist = obserAppointmentList;
 		try {
-			CSVTerminWriter.writeAppointment(obserlist, "test", ";");
+			BinAppointmentWriter.writeAppointment(obserlist, "Termine", ";");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -138,9 +158,12 @@ public class Control {
 	// auszugeben
 	private void printalles() {
 		for (Appointment i : obserAppointmentList) {
-			System.out.println("Vorname: " + i.getVornameProperty().getValue()
-					+ "\t Nachname: " + i.getNameProperty().getValue()
-					+ "\t Adresse: " + i.getAdresseProperty().getValue());
+			System.out.println("Beschreibung: " + i.getTerminBeschreibung()
+					+ "\t Bezeichnung: " + i.getTerminBezeichnung()
+					+ "\t Kategorie: " + i.getTerminkategorie()
+					+ "\t Datum: " + i.getDatum()
+					+ "\t Startzeit: " + i.getStartUhrzeit()
+					+ "\t Endzeit: " + i.getEndUhrzeit());
 		}
 	}
 }

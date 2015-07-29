@@ -6,12 +6,12 @@ import javafx.beans.property.StringProperty;
 import javafx.util.Callback;
 import AdressBook.ContactDetails;
 
-public class Appointment extends ContactDetails {
+public class ObservableContactDetails extends ContactDetails {
 	private StringProperty	nameProperty;
 	private StringProperty	vornameProperty;
 	private StringProperty	adresseProperty;
 
-	public Appointment(String vorname, String name, String adresse) {
+	public ObservableContactDetails(String vorname, String name, String adresse) {
 		// constructor , super ruft alte ContactDetails mit auf. 
 		super(vorname, name, adresse);
 

@@ -15,13 +15,13 @@ public class CSVTerminWriter {
 
 	final static Charset ENCODING = StandardCharsets.UTF_8;
 
-	public void writeAppointment(List<Appointment> appointment,
+	public static void writeAppointment(List<Appointment> appointment,
 			String filename, String splitter) throws IOException {
-		Path path = Paths.get( filename);
+		Path path = Paths.get(filename + ".csv");
 		writeAppointment(appointment, path, splitter);
 	}
 
-	public void writeAppointment(List<Appointment> appointment, Path path,
+	public static void writeAppointment(List<Appointment> appointment, Path path,
 			String splitter) throws IOException {
 		List<String> lines = new ArrayList<>();
 		for (Appointment index : appointment) {
@@ -30,23 +30,25 @@ public class CSVTerminWriter {
 		Files.write(path, lines, ENCODING);
 	}
 
-	private String formatAppointmentToCSV(Appointment appointment,
+	private static String formatAppointmentToCSV(Appointment appointment,
 			String splitter) {
-		return appointment.getDatum() + splitter
-				+ appointment.getTerminBezeichnung() + splitter
-				+ appointment.getStartUhrzeit() + splitter
-				+ appointment.getEndUhrzeit() + splitter
-				+ appointment.getTerminkategorie() + splitter;
+		return 
+				appointment.getTerminkategorie().getValue() + splitter
+				+ appointment.getDatum().getValue() + splitter
+				+ appointment.getStartUhrzeit().getValue() + splitter
+				+ appointment.getEndUhrzeit().getValue() + splitter
+				+ appointment.getTerminBezeichnung().getValue() + splitter
+				+ appointment.getTerminBeschreibung().getValue() + splitter;
 
 	}
 
-	public void writeAppointment(Appointment appointment, String filename,
+	public static void writeAppointment(Appointment appointment, String filename,
 			String splitter) throws IOException {
-		Path path = Paths.get("output/" + filename + ".csv");
+		Path path = Paths.get(filename + ".csv");
 		writeAppointment(appointment, path, splitter);
 	}
 
-	public void writeAppointment(Appointment appointment, Path path,
+	public static void writeAppointment(Appointment appointment, Path path,
 			String splitter) throws IOException {
 		List<String> lines = new ArrayList<>();
 		lines.add(formatAppointmentToCSV(appointment, splitter));

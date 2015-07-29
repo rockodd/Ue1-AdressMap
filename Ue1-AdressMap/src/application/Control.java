@@ -20,17 +20,17 @@ import CsvAdressbook.*;
 
 public class Control {
 
-	ObservableList<Appointment>		obserContactDetailsList;
-	private ListView<Appointment>	listView;
-	private TableView<Appointment>	tableView;
+	ObservableList<ObservableContactDetails>		obserContactDetailsList;
+	private ListView<ObservableContactDetails>	listView;
+	private TableView<ObservableContactDetails>	tableView;
 	private Button											btnprint;
 	private Button											btnadd;
 	private Button											btnsave;
 	private Button											btnload;
 	 													
 
-	public Control(ListView<Appointment> listViewIN,
-			TableView<Appointment> tableViewIN, Button btnprintIN,
+	public Control(ListView<ObservableContactDetails> listViewIN,
+			TableView<ObservableContactDetails> tableViewIN, Button btnprintIN,
 			Button btnaddIN, Button btnsavIN, Button btnloadIN) {
 		// Übergabeobjekte übernehmen
 		this.listView = listViewIN;
@@ -57,11 +57,11 @@ public class Control {
 
 		// observableArrayList für TableView (Werden für FX Views benötigt um
 		// Listen zu übergeben)
-		obserContactDetailsList.addAll(new Appointment("Peter",
+		obserContactDetailsList.addAll(new ObservableContactDetails("Peter",
 				"Panner", "Nimmerland 3"));
-		obserContactDetailsList.addAll(new Appointment("Sepp",
+		obserContactDetailsList.addAll(new ObservableContactDetails("Sepp",
 				"Blatter", "Korruptionsweg 900"));
-		obserContactDetailsList.addAll(new Appointment("Frodo",
+		obserContactDetailsList.addAll(new ObservableContactDetails("Frodo",
 				"Beutling", "Auenland 4"));
 
 		// observableArrayList für die ListView mit allen Keys
@@ -69,11 +69,11 @@ public class Control {
 		// FXCollections.observableArrayList();
 
 		// Spalten für die TableView anlegen
-		TableColumn<Appointment, String> firstNameCol = new TableColumn<Appointment, String>(
+		TableColumn<ObservableContactDetails, String> firstNameCol = new TableColumn<ObservableContactDetails, String>(
 				"Vorname");
-		TableColumn<Appointment, String> lastNameCol = new TableColumn<Appointment, String>(
+		TableColumn<ObservableContactDetails, String> lastNameCol = new TableColumn<ObservableContactDetails, String>(
 				"Nachname");
-		TableColumn<Appointment, String> adressCol = new TableColumn<Appointment, String>(
+		TableColumn<ObservableContactDetails, String> adressCol = new TableColumn<ObservableContactDetails, String>(
 				"Adresse");
 
 		// Lambda zum füllen der Spalten
@@ -108,15 +108,15 @@ public class Control {
 	}
 
 	private Object loadFile() {
-		List<Appointment> obserlist = CSVContactsReader.readEntityList("test",";");
+		List<ObservableContactDetails> obserlist = CSVContactsReader.readEntityList("test",";");
 		obserContactDetailsList.clear();
-		for (Appointment contact : obserlist) obserContactDetailsList.addAll(contact);
+		for (ObservableContactDetails contact : obserlist) obserContactDetailsList.addAll(contact);
 		return null;
 	}
 
 	private Object writeFile() {
 		printalles();
-		List<Appointment> obserlist = obserContactDetailsList;
+		List<ObservableContactDetails> obserlist = obserContactDetailsList;
 		try {
 			CSVContactsWriter.writeEntityList(obserlist,"test",";");
 		} catch (IOException e) {
@@ -128,7 +128,7 @@ public class Control {
 
 	// Methode um neuen leeren Kontakt anzulegen
 	private Object addcontact() {
-		Appointment newContact = new Appointment(
+		ObservableContactDetails newContact = new ObservableContactDetails(
 				"Vorname", "Nachname", "Adresse");
 		obserContactDetailsList.addAll(newContact);
 		return null;
@@ -137,7 +137,7 @@ public class Control {
 	// Methode um alles aus der Observable Contact Details Liste auf der Konsole
 	// auszugeben
 	private void printalles() {
-		for (Appointment i : obserContactDetailsList) {
+		for (ObservableContactDetails i : obserContactDetailsList) {
 			System.out.println("Vorname: " + i.getVornameProperty().getValue()
 					+ "\t Nachname: " + i.getNameProperty().getValue()
 					+ "\t Adresse: " + i.getAdresseProperty().getValue());

@@ -12,7 +12,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Appointment {
-	
+	// Konstruktor
 	public Appointment() {
 		super();
 		this.terminKategorie = new SimpleStringProperty("Termin-Kategorie");
@@ -43,36 +43,36 @@ public class Appointment {
 
 	/// ### TERMINKATEGORIE ###///
 	private StringProperty terminKategorie = new SimpleStringProperty();
-	public String getTerminkategorie() {return terminKategorie.get();}
+	public StringProperty getTerminkategorie() {return terminKategorie;}
 	public void setTerminkategorie(String terminKategorie) {this.terminKategorie.set(terminKategorie);}
 
 	//### DATUM  #### ///
 	//private ObjectProperty<LocalDate> datum = new SimpleObjectProperty<LocalDate>(LocalDate.of(1999, 2, 21));
 	private ObjectProperty<LocalDate> datum = new SimpleObjectProperty<LocalDate>();
-	public LocalDate getDatum() {return datum.get();}
+	public ObjectProperty<LocalDate> getDatum() {return datum;}
 	public void setDatum(LocalDate date) {	this.datum.set(date);	}
 
 	//### STARTUHRZEIT ###///
 	private ObjectProperty<LocalTime> startUhrzeit = new SimpleObjectProperty<LocalTime>();
-	public LocalTime getStartUhrzeit() {return startUhrzeit.get();}
+	public ObjectProperty<LocalTime> getStartUhrzeit() {return startUhrzeit;}
 	public void setStartUhrzeit(LocalTime startTime) {this.startUhrzeit.set(startTime);}
 
 	/// ### ENDUHRZEIT ###/// // 1B //
 	private ObjectProperty<LocalTime> endUhrzeit = new SimpleObjectProperty<LocalTime>();
-	public LocalTime getEndUhrzeit() {return endUhrzeit.get();}
+	public ObjectProperty<LocalTime> getEndUhrzeit() {return endUhrzeit;}
 	public void setEndUhrzeit(LocalTime endTime) throws BeforeException {
 		if(getStartUhrzeit()==null) throw new BeforeException();
-		if(endTime.isBefore(getStartUhrzeit())) throw new BeforeException();
+		if(endTime.isBefore(getStartUhrzeit().get())) throw new BeforeException();
 		this.endUhrzeit.set(endTime);}
 
 	/// ### TERMINBEZEICHNUNG ###///
 	private StringProperty terminBezeichnung = new SimpleStringProperty();
-	public String getTerminBezeichnung(){return terminBezeichnung.get();}
+	public StringProperty getTerminBezeichnung(){return terminBezeichnung;}
 	public void setTerminBezeichnung(String terminBezeichnung){this.terminBezeichnung.set(terminBezeichnung);}
 	private StringProperty terminBeschreibung = new SimpleStringProperty();
 	
 	/// ### TERMINBESCHREIBUNG ###///
-	public String getTerminBeschreibung(){return terminBeschreibung.get();}
+	public StringProperty getTerminBeschreibung(){return terminBeschreibung;}
 	public void setTerminBeschreibung(String terminBeschreibung){this.terminBeschreibung.set(terminBeschreibung);}
 
 	/// ### MAIN METHODE ###/// // 1B //
